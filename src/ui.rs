@@ -186,12 +186,12 @@ impl SimpleComponent for App {
                                 },
 
                                 gtk::Box {
-                                    set_hexpand: true,
+                                    set_size_request: (276, 1),
                                 },
 
                                 gtk::Box {
                                     set_orientation: gtk::Orientation::Horizontal,
-                                    set_spacing: 18,
+                                    set_spacing: 14,
                                     set_halign: gtk::Align::Center,
                                     set_valign: gtk::Align::Center,
                                     add_css_class: "dock-transport",
