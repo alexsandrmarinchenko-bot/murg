@@ -42,7 +42,7 @@ impl SimpleComponent for App {
                 set_orientation: gtk::Orientation::Vertical,
                 set_spacing: 0,
                 set_margin_top: 14,
-                set_margin_bottom: 18,
+                set_margin_bottom: 30,
                 set_margin_start: 10,
                 set_margin_end: 10,
                 set_hexpand: true,
@@ -70,7 +70,7 @@ impl SimpleComponent for App {
                     set_orientation: gtk::Orientation::Vertical,
                     set_spacing: 8,
                     set_margin_start: 20,
-                    set_margin_end: 20,
+                    set_margin_end: 60,
                     add_css_class: "bottom-player",
 
                     gtk::Label {
@@ -88,20 +88,37 @@ impl SimpleComponent for App {
                         set_spacing: 22,
                         set_valign: gtk::Align::Center,
 
-                        gtk::Picture {
-                            #[watch]
-                            set_filename: model.art_path.as_deref(),
-                            set_can_shrink: true,
+                        gtk::ScrolledWindow {
+                            set_hscrollbar_policy: gtk::PolicyType::Never,
+                            set_vscrollbar_policy: gtk::PolicyType::Never,
+                            set_min_content_width: 101,
+                            set_max_content_width: 101,
+                            set_min_content_height: 96,
+                            set_max_content_height: 96,
+                            set_propagate_natural_width: false,
+                            set_propagate_natural_height: false,
+                            set_has_frame: false,
                             set_size_request: (101, 96),
                             set_halign: gtk::Align::Start,
-                            add_css_class: "dock-cover",
+                            set_valign: gtk::Align::Start,
+                            set_margin_start: 13,
+                            add_css_class: "dock-cover-viewport",
+
+                            gtk::Picture {
+                                #[watch]
+                                set_filename: model.art_path.as_deref(),
+                                set_can_shrink: true,
+                                set_content_fit: gtk::ContentFit::Cover,
+                                set_size_request: (101, 96),
+                                add_css_class: "dock-cover",
+                            }
                         },
 
                         gtk::Box {
                             set_orientation: gtk::Orientation::Vertical,
-                            set_spacing: 10,
+                            set_spacing: 8,
                             set_hexpand: true,
-                            set_valign: gtk::Align::Center,
+                            set_valign: gtk::Align::End,
 
                             gtk::Scale {
                                 set_orientation: gtk::Orientation::Horizontal,
@@ -125,39 +142,15 @@ impl SimpleComponent for App {
 
                             gtk::Box {
                                 set_orientation: gtk::Orientation::Horizontal,
-                                set_spacing: 8,
-
-                                gtk::Label {
-                                    #[watch]
-                                    set_label: &format_time(model.position),
-                                    set_halign: gtk::Align::Start,
-                                    add_css_class: "dock-time",
-                                },
-
-                                gtk::Box {
-                                    set_hexpand: true,
-                                },
-
-                                gtk::Label {
-                                    #[watch]
-                                    set_label: &format_time(model.duration),
-                                    set_halign: gtk::Align::End,
-                                    add_css_class: "dock-time",
-                                },
-                            },
-
-                            gtk::Box {
-                                set_orientation: gtk::Orientation::Horizontal,
                                 set_spacing: 12,
-                                set_margin_top: 2,
                                 set_valign: gtk::Align::Center,
                                 add_css_class: "dock-controls",
 
                                 gtk::Box {
                                     set_orientation: gtk::Orientation::Horizontal,
-                                    set_spacing: 7,
+                                    set_spacing: 4,
                                     set_valign: gtk::Align::Center,
-                                    set_width_request: 150,
+                                    set_width_request: 94,
                                     add_css_class: "dock-volume",
 
                                     gtk::Scale {
@@ -165,6 +158,7 @@ impl SimpleComponent for App {
                                         set_digits: 0,
                                         set_draw_value: false,
                                         set_hexpand: true,
+                                        set_size_request: (68, 22),
                                         set_range: (0.0, 100.0),
                                         set_tooltip_text: Some("Громкость"),
                                         add_css_class: "dock-volume-scale",
@@ -180,7 +174,7 @@ impl SimpleComponent for App {
 
                                     gtk::Image {
                                         set_icon_name: Some("audio-volume-high-symbolic"),
-                                        set_pixel_size: 18,
+                                        set_pixel_size: 22,
                                         set_tooltip_text: Some("Громкость"),
                                     },
                                 },
@@ -242,6 +236,8 @@ impl SimpleComponent for App {
                 gtk::Label {
                     #[watch]
                     set_label: &model.status,
+                    #[watch]
+                    set_visible: !matches!(model.status.as_str(), "Playing" | "Paused" | "Stopped"),
                     set_halign: gtk::Align::Start,
                     set_ellipsize: gtk::pango::EllipsizeMode::End,
                     set_max_width_chars: 100,
@@ -352,16 +348,6 @@ fn run_action(model: &mut App, method: &str) {
         Ok(()) => refresh_model(model),
         Err(error) => model.status = format!("Ошибка управления: {error}"),
     }
-}
-
-fn format_time(seconds: f64) -> String {
-    let total = if seconds.is_finite() {
-        seconds.max(0.0) as u64
-    } else {
-        0
-    };
-
-    format!("{:02}:{:02}", total / 60, total % 60)
 }
 
 thread_local! {
