@@ -54,9 +54,9 @@ impl SimpleComponent for App {
                     set_halign: gtk::Align::Start,
 
                     gtk::Button {
-                        set_icon_name: "view-list-symbolic",
+                        set_icon_name: "media-playback-start-symbolic",
                         set_tooltip_text: Some("Библиотека"),
-                        set_size_request: (38, 38),
+                        set_size_request: (31, 31),
                         add_css_class: "library-button",
                     },
                 },
