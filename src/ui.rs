@@ -92,9 +92,7 @@ impl SimpleComponent for App {
                             set_hscrollbar_policy: gtk::PolicyType::Never,
                             set_vscrollbar_policy: gtk::PolicyType::Never,
                             set_min_content_width: 101,
-                            set_max_content_width: 101,
                             set_min_content_height: 96,
-                            set_max_content_height: 96,
                             set_propagate_natural_width: false,
                             set_propagate_natural_height: false,
                             set_has_frame: false,
@@ -108,7 +106,6 @@ impl SimpleComponent for App {
                                 #[watch]
                                 set_filename: model.art_path.as_deref(),
                                 set_can_shrink: true,
-                                set_content_fit: gtk::ContentFit::Cover,
                                 set_size_request: (101, 96),
                                 add_css_class: "dock-cover",
                             }
