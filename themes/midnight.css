@@ -189,3 +189,50 @@ button.theme-choice-button {
     min-height: 40px;
     padding: 0 12px;
 }
+
+/* Figma button artwork is rendered from local SVGs. Keep GTK decoration out. */
+button.library-button,
+button.dock-skip-button,
+button.dock-play-button,
+button.dock-settings-button {
+    background-image: none;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+button.library-button,
+button.dock-skip-button {
+    min-width: 31px;
+    min-height: 31px;
+}
+
+button.dock-play-button {
+    min-width: 43px;
+    min-height: 41px;
+}
+
+button.dock-settings-button {
+    min-width: 38px;
+    min-height: 38px;
+}
+
+button.library-button:hover,
+button.dock-skip-button:hover,
+button.dock-play-button:hover,
+button.dock-settings-button:hover {
+    background-color: transparent;
+    background-image: none;
+}
+
+button.library-button image,
+button.dock-skip-button image,
+button.dock-play-button image,
+button.dock-settings-button image {
+    padding: 0;
+    margin: 0;
+}
