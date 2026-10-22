@@ -34,177 +34,290 @@ impl SimpleComponent for App {
     view! {
         gtk::Window {
             set_title: Some("Murglar Controller"),
+            set_default_width: 780,
+            set_default_height: 480,
 
             gtk::Box {
                 set_orientation: gtk::Orientation::Vertical,
-                set_spacing: 16,
+                set_spacing: 0,
                 set_margin_top: 22,
-                set_margin_bottom: 22,
+                set_margin_bottom: 18,
                 set_margin_start: 24,
                 set_margin_end: 24,
-                set_valign: gtk::Align::Center,
-
-                gtk::Label {
-                    set_label: "MURGLAR",
-                    add_css_class: "eyebrow",
-                },
-
-                gtk::Picture {
-                    #[watch]
-                    set_filename: model.art_path.as_deref(),
-                    set_can_shrink: true,
-                    set_width_request: 160,
-                    set_height_request: 160,
-                    set_halign: gtk::Align::Center,
-                    add_css_class: "album-cover",
-                },
 
                 gtk::Box {
-                    set_orientation: gtk::Orientation::Vertical,
-                    set_spacing: 6,
-                    set_halign: gtk::Align::Center,
+                    set_orientation: gtk::Orientation::Horizontal,
+                    set_spacing: 12,
+                    set_margin_bottom: 20,
+                    add_css_class: "topbar",
 
                     gtk::Label {
-                        #[watch]
-                        set_label: &model.title,
-                        add_css_class: "track-title",
-                        set_wrap: true,
-                        set_justify: gtk::Justification::Center,
-                        set_max_width_chars: 30,
-                    },
-
-                    gtk::Label {
-                        #[watch]
-                        set_label: &model.artist,
-                        add_css_class: "artist",
-                        set_wrap: true,
-                        set_justify: gtk::Justification::Center,
-                        set_max_width_chars: 36,
-                    },
-                },
-
-                gtk::Box {
-                    set_orientation: gtk::Orientation::Vertical,
-                    set_spacing: 8,
-
-                    gtk::Scale {
-                        set_orientation: gtk::Orientation::Horizontal,
-                        set_digits: 0,
-                        set_draw_value: false,
-                        set_hexpand: true,
-                        add_css_class: "seek-scale",
-
-                        #[watch]
-                        #[block_signal(seek_handler)]
-                        set_range: (0.0, model.duration.max(1.0)),
-
-                        #[watch]
-                        #[block_signal(seek_handler)]
-                        set_value: model.position,
-
-                        connect_value_changed[sender = sender.clone()] => move |scale| {
-                            sender.input(Msg::Seek(scale.value()));
-                        } @seek_handler,
+                        set_label: "♫",
+                        add_css_class: "brand-mark",
                     },
 
                     gtk::Box {
-                        set_orientation: gtk::Orientation::Horizontal,
-                        set_halign: gtk::Align::Fill,
+                        set_orientation: gtk::Orientation::Vertical,
+                        set_spacing: 1,
+
+                        gtk::Label {
+                            set_label: "MUSIC PLAYER",
+                            set_halign: gtk::Align::Start,
+                            add_css_class: "eyebrow",
+                        },
+
+                        gtk::Label {
+                            set_label: "Murglar Controller",
+                            set_halign: gtk::Align::Start,
+                            add_css_class: "brand-title",
+                        },
+                    },
+
+                    gtk::Box {
+                        set_hexpand: true,
+                    },
+
+                    gtk::Button {
+                        set_icon_name: "emblem-system-symbolic",
+                        set_tooltip_text: Some("Настройки"),
+                        set_size_request: (38, 38),
+                        add_css_class: "settings-open-button",
+                        connect_clicked => Msg::OpenSettings,
+                    },
+                },
+
+                gtk::Separator {
+                    add_css_class: "separator",
+                },
+
+                gtk::Box {
+                    set_orientation: gtk::Orientation::Horizontal,
+                    set_spacing: 28,
+                    set_margin_top: 24,
+                    set_margin_bottom: 22,
+                    set_vexpand: true,
+                    add_css_class: "workspace",
+
+                    gtk::Box {
+                        set_orientation: gtk::Orientation::Vertical,
+                        set_spacing: 14,
+                        set_width_request: 270,
+                        set_hexpand: true,
+                        set_valign: gtk::Align::Center,
+                        add_css_class: "cover-column",
+
+                        gtk::Picture {
+                            #[watch]
+                            set_filename: model.art_path.as_deref(),
+                            set_can_shrink: true,
+                            set_size_request: (250, 250),
+                            set_halign: gtk::Align::Fill,
+                            add_css_class: "album-cover",
+                        },
+
+                        gtk::Label {
+                            set_label: "NOW PLAYING",
+                            set_halign: gtk::Align::Start,
+                            add_css_class: "eyebrow",
+                        },
 
                         gtk::Label {
                             #[watch]
-                            set_label: &format_time(model.position),
-                            add_css_class: "time-label",
+                            set_label: &model.title,
                             set_halign: gtk::Align::Start,
+                            set_wrap: true,
+                            set_xalign: 0.0,
+                            set_max_width_chars: 30,
+                            add_css_class: "track-title",
                         },
+
+                        gtk::Label {
+                            #[watch]
+                            set_label: &model.artist,
+                            set_halign: gtk::Align::Start,
+                            set_wrap: true,
+                            set_xalign: 0.0,
+                            set_max_width_chars: 36,
+                            add_css_class: "artist",
+                        },
+                    },
+
+                    gtk::Separator {
+                        set_orientation: gtk::Orientation::Vertical,
+                        add_css_class: "separator",
+                    },
+
+                    gtk::Box {
+                        set_orientation: gtk::Orientation::Vertical,
+                        set_spacing: 16,
+                        set_hexpand: true,
+                        set_valign: gtk::Align::Center,
+                        add_css_class: "player-column",
 
                         gtk::Box {
-                            set_hexpand: true,
-                        },
+                            set_orientation: gtk::Orientation::Horizontal,
+                            set_spacing: 8,
 
-                        gtk::Label {
-                            #[watch]
-                            set_label: &format_time(model.duration),
-                            add_css_class: "time-label",
-                            set_halign: gtk::Align::End,
-                        },
-                    },
+                            gtk::Box {
+                                set_orientation: gtk::Orientation::Vertical,
+                                set_spacing: 3,
+                                set_hexpand: true,
 
-                    gtk::Box {
-                        set_orientation: gtk::Orientation::Horizontal,
-                        set_spacing: 10,
-                        set_halign: gtk::Align::Start,
-                        add_css_class: "volume-row",
+                                gtk::Label {
+                                    set_label: "PLAYBACK",
+                                    set_halign: gtk::Align::Start,
+                                    add_css_class: "eyebrow",
+                                },
 
-                        gtk::Image {
-                            set_icon_name: Some("audio-volume-high-symbolic"),
-                            set_pixel_size: 17,
-                            set_tooltip_text: Some("Громкость"),
+                                gtk::Label {
+                                    set_label: "Сейчас играет",
+                                    set_halign: gtk::Align::Start,
+                                    add_css_class: "section-title",
+                                },
+                            },
+
+                            gtk::Label {
+                                #[watch]
+                                set_label: &model.status,
+                                set_wrap: true,
+                                set_max_width_chars: 24,
+                                set_halign: gtk::Align::End,
+                                add_css_class: "status-label",
+                            },
                         },
 
                         gtk::Scale {
                             set_orientation: gtk::Orientation::Horizontal,
                             set_digits: 0,
                             set_draw_value: false,
-                            set_width_request: 130,
-                            set_range: (0.0, 100.0),
-                            add_css_class: "volume-scale",
+                            set_hexpand: true,
+                            add_css_class: "seek-scale",
 
                             #[watch]
-                            #[block_signal(volume_handler)]
-                            set_value: model.volume * 100.0,
+                            #[block_signal(seek_handler)]
+                            set_range: (0.0, model.duration.max(1.0)),
+
+                            #[watch]
+                            #[block_signal(seek_handler)]
+                            set_value: model.position,
 
                             connect_value_changed[sender = sender.clone()] => move |scale| {
-                                sender.input(Msg::SetVolume(scale.value()));
-                            } @volume_handler,
+                                sender.input(Msg::Seek(scale.value()));
+                            } @seek_handler,
                         },
 
-                        gtk::Button {
-                            set_icon_name: "emblem-system-symbolic",
-                            set_tooltip_text: Some("Настройки"),
-                            set_size_request: (36, 36),
-                            set_hexpand: false,
-                            set_vexpand: false,
-                            add_css_class: "settings-open-button",
-                            connect_clicked => Msg::OpenSettings,
+                        gtk::Box {
+                            set_orientation: gtk::Orientation::Horizontal,
+
+                            gtk::Label {
+                                #[watch]
+                                set_label: &format_time(model.position),
+                                set_halign: gtk::Align::Start,
+                                add_css_class: "time-label",
+                            },
+
+                            gtk::Box {
+                                set_hexpand: true,
+                            },
+
+                            gtk::Label {
+                                #[watch]
+                                set_label: &format_time(model.duration),
+                                set_halign: gtk::Align::End,
+                                add_css_class: "time-label",
+                            },
+                        },
+
+                        gtk::Box {
+                            set_orientation: gtk::Orientation::Horizontal,
+                            set_spacing: 12,
+                            set_halign: gtk::Align::Center,
+                            set_margin_top: 8,
+                            set_margin_bottom: 8,
+                            add_css_class: "transport-row",
+
+                            gtk::Button {
+                                set_icon_name: "media-skip-backward-symbolic",
+                                set_tooltip_text: Some("Предыдущий трек"),
+                                add_css_class: "transport-button",
+                                connect_clicked => Msg::Previous,
+                            },
+
+                            gtk::Button {
+                                #[watch]
+                                set_icon_name: if model.status == "Playing" {
+                                    "media-playback-pause-symbolic"
+                                } else {
+                                    "media-playback-start-symbolic"
+                                },
+                                set_tooltip_text: Some("Воспроизвести / пауза"),
+                                add_css_class: "play-button",
+                                connect_clicked => Msg::Toggle,
+                            },
+
+                            gtk::Button {
+                                set_icon_name: "media-skip-forward-symbolic",
+                                set_tooltip_text: Some("Следующий трек"),
+                                add_css_class: "transport-button",
+                                connect_clicked => Msg::Next,
+                            },
+                        },
+
+                        gtk::Separator {
+                            add_css_class: "separator",
+                        },
+
+                        gtk::Box {
+                            set_orientation: gtk::Orientation::Horizontal,
+                            set_spacing: 12,
+                            set_margin_top: 8,
+                            add_css_class: "volume-row",
+
+                            gtk::Image {
+                                set_icon_name: Some("audio-volume-high-symbolic"),
+                                set_pixel_size: 17,
+                                set_tooltip_text: Some("Громкость"),
+                            },
+
+                            gtk::Scale {
+                                set_orientation: gtk::Orientation::Horizontal,
+                                set_digits: 0,
+                                set_draw_value: false,
+                                set_hexpand: true,
+                                set_range: (0.0, 100.0),
+                                add_css_class: "volume-scale",
+
+                                #[watch]
+                                #[block_signal(volume_handler)]
+                                set_value: model.volume * 100.0,
+
+                                connect_value_changed[sender = sender.clone()] => move |scale| {
+                                    sender.input(Msg::SetVolume(scale.value()));
+                                } @volume_handler,
+                            },
+
+                            gtk::Label {
+                                #[watch]
+                                set_label: &format!("{:.0}%", model.volume * 100.0),
+                                set_width_chars: 4,
+                                set_halign: gtk::Align::End,
+                                add_css_class: "time-label",
+                            },
                         },
                     },
                 },
 
-                gtk::Box {
-                    set_orientation: gtk::Orientation::Horizontal,
-                    set_spacing: 26,
-                    set_halign: gtk::Align::Center,
-                    add_css_class: "transport-row",
-
-                    gtk::Button {
-                        set_icon_name: "media-skip-backward-symbolic",
-                        set_tooltip_text: Some("Предыдущий трек"),
-                        add_css_class: "transport-button",
-                        connect_clicked => Msg::Previous,
-                    },
-
-                    gtk::Button {
-                        set_icon_name: "media-playback-start-symbolic",
-                        set_tooltip_text: Some("Воспроизвести / пауза"),
-                        add_css_class: "play-button",
-                        connect_clicked => Msg::Toggle,
-                    },
-
-                    gtk::Button {
-                        set_icon_name: "media-skip-forward-symbolic",
-                        set_tooltip_text: Some("Следующий трек"),
-                        add_css_class: "transport-button",
-                        connect_clicked => Msg::Next,
-                    },
+                gtk::Separator {
+                    add_css_class: "separator",
                 },
 
-gtk::Label {
+                gtk::Label {
                     #[watch]
                     set_label: &model.status,
-                    add_css_class: "status-label",
+                    set_halign: gtk::Align::Start,
                     set_wrap: true,
-                    set_justify: gtk::Justification::Center,
+                    set_margin_top: 12,
+                    add_css_class: "footer-status",
                 },
             }
         }
@@ -321,8 +434,6 @@ fn format_time(seconds: f64) -> String {
     format!("{:02}:{:02}", total / 60, total % 60)
 }
 
-
-
 thread_local! {
     static THEME_PROVIDER: std::cell::RefCell<Option<gtk::CssProvider>> =
         const { std::cell::RefCell::new(None) };
@@ -331,17 +442,18 @@ thread_local! {
 fn theme_config_path() -> Option<std::path::PathBuf> {
     let base = std::env::var_os("XDG_CONFIG_HOME")
         .map(std::path::PathBuf::from)
-        .or_else(|| std::env::var_os("HOME")
-            .map(|home| std::path::PathBuf::from(home).join(".config")))?;
+        .or_else(|| {
+            std::env::var_os("HOME").map(|home| std::path::PathBuf::from(home).join(".config"))
+        })?;
     Some(base.join("murglar-controller").join("theme"))
 }
 
 fn save_theme(theme: &str) {
-    let Some(path) = theme_config_path() else { return };
+    let Some(path) = theme_config_path() else {
+        return;
+    };
     if let Some(parent) = path.parent() {
-        if let Err(e) = std::fs::create_dir_all(parent)
-            .and_then(|_| std::fs::write(&path, theme))
-        {
+        if let Err(e) = std::fs::create_dir_all(parent).and_then(|_| std::fs::write(&path, theme)) {
             eprintln!("Не удалось сохранить тему: {e}");
         }
     }
@@ -351,8 +463,12 @@ fn load_saved_theme() -> String {
     theme_config_path()
         .and_then(|p| std::fs::read_to_string(p).ok())
         .map(|s| s.trim().to_owned())
-        .filter(|s| matches!(s.as_str(),
-            "glass" | "matte" | "cyberpunk" | "midnight" | "forest" | "amber"))
+        .filter(|s| {
+            matches!(
+                s.as_str(),
+                "glass" | "matte" | "cyberpunk" | "midnight" | "forest" | "amber"
+            )
+        })
         .unwrap_or_else(|| "glass".to_owned())
 }
 
@@ -368,7 +484,8 @@ pub fn apply_theme(theme: &str) {
 
     // CSS подключается динамически, чтобы смена темы работала без перезапуска.
     let path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("themes").join(file);
+        .join("themes")
+        .join(file);
     let provider = gtk::CssProvider::new();
     if let Ok(css) = std::fs::read_to_string(path) {
         provider.load_from_data(&css);
@@ -383,7 +500,9 @@ pub fn apply_theme(theme: &str) {
                 gtk::style_context_remove_provider_for_display(&display, &old);
             }
             gtk::style_context_add_provider_for_display(
-                &display, &provider, gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
+                &display,
+                &provider,
+                gtk::STYLE_PROVIDER_PRIORITY_APPLICATION,
             );
             *slot.borrow_mut() = Some(provider);
         });
