@@ -93,3 +93,11 @@ button.dock-settings-button image {
     padding: 0;
     margin: 0;
 }
+
+/* Figma-sized volume marker. */
+box.dock-volume-icon {
+    background-color: #d9d9d9;
+    border-radius: 3px;
+    min-width: 22px;
+    min-height: 22px;
+}
