@@ -59,7 +59,7 @@ impl SimpleComponent for App {
                         add_css_class: "library-button",
 
                         gtk::Image {
-                            set_from_file: Some(icon_asset("library.svg")),
+                            set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/library.svg")),
                         },
                     },
                 },
@@ -202,7 +202,7 @@ impl SimpleComponent for App {
                                         add_css_class: "dock-skip-button",
 
                                         gtk::Image {
-                                            set_from_file: Some(icon_asset("previous.svg")),
+                                            set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/previous.svg")),
                                         },
 
                                         connect_clicked => Msg::Previous,
@@ -220,11 +220,11 @@ impl SimpleComponent for App {
 
                                         gtk::Image {
                                             #[watch]
-                                            set_from_file: Some(icon_asset(if model.status == "Playing" {
-                                                "pause.svg"
+                                            set_from_file: Some(if model.status == "Playing" {
+                                                concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/pause.svg")
                                             } else {
-                                                "play.svg"
-                                            })),
+                                                concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/play.svg")
+                                            }),
                                         },
 
                                         connect_clicked => Msg::Toggle,
@@ -236,7 +236,7 @@ impl SimpleComponent for App {
                                         add_css_class: "dock-skip-button",
 
                                         gtk::Image {
-                                            set_from_file: Some(icon_asset("next.svg")),
+                                            set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/next.svg")),
                                         },
 
                                         connect_clicked => Msg::Next,
@@ -253,7 +253,7 @@ impl SimpleComponent for App {
                                     add_css_class: "dock-settings-button",
 
                                     gtk::Image {
-                                        set_from_file: Some(icon_asset("settings.svg")),
+                                        set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/settings.svg")),
                                     },
 
                                     connect_clicked => Msg::OpenSettings,
@@ -383,13 +383,6 @@ fn run_action(model: &mut App, method: &str) {
 thread_local! {
     static THEME_PROVIDER: std::cell::RefCell<Option<gtk::CssProvider>> =
         const { std::cell::RefCell::new(None) };
-}
-
-fn icon_asset(name: &str) -> std::path::PathBuf {
-    std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("assets")
-        .join("icons")
-        .join(name)
 }
 
 fn format_time(seconds: f64) -> String {
