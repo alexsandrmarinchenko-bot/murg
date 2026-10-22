@@ -178,10 +178,10 @@ impl SimpleComponent for App {
                                         } @volume_handler,
                                     },
 
-                                    gtk::Image {
-                                        set_icon_name: Some("audio-volume-high-symbolic"),
-                                        set_pixel_size: 22,
+                                    gtk::Box {
+                                        set_size_request: (22, 22),
                                         set_tooltip_text: Some("Громкость"),
+                                        add_css_class: "dock-volume-icon",
                                     },
                                 },
 
