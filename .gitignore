@@ -1,0 +1,36 @@
+/target
+
+# Резервные копии проекта
+/backups/
+/backups-*/
+*.bak
+*.bak.*
+
+# Локальные секреты и настройки
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Rust
+/target/
+
+# Резервные копии и временные файлы
+/backups/
+/backups-*/
+*.bak
+*.bak.*
+*.rs.bk
+
+# Локальные секреты и настройки
+.env
+.env.*
+!.env.example
+
+# Ключи
+*.pem
+*.key
+
+# Сборка Rust
+/target/
