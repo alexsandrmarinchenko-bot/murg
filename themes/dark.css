@@ -327,6 +327,14 @@ scale.dock-volume-scale slider {
     color: #b5b5b5;
 }
 
+/* In the Figma frame this control is a plain 22px square, not a GTK speaker glyph. */
+box.dock-volume-icon {
+    background-color: #d9d9d9;
+    border-radius: 3px;
+    min-width: 22px;
+    min-height: 22px;
+}
+
 
 label.dock-status {
     color: #c3c3c3;
