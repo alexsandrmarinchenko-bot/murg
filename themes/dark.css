@@ -181,6 +181,12 @@ picture.dock-cover {
     background-image: none;
 }
 
+/* Keep the Figma canvas opaque even with GTK's transparent nested-box rule. */
+window > box.main-surface {
+    background-color: #202020;
+    background-image: none;
+}
+
 button.library-button,
 button.dock-settings-button {
     background-color: transparent;
