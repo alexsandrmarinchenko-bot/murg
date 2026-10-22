@@ -101,7 +101,7 @@ impl SimpleComponent for App {
                             set_size_request: (101, 96),
                             set_halign: gtk::Align::Start,
                             set_valign: gtk::Align::Start,
-                            set_margin_start: 13,
+                            set_margin_start: 14,
                             add_css_class: "dock-cover-viewport",
 
                             gtk::Picture {
@@ -125,6 +125,12 @@ impl SimpleComponent for App {
                                 set_digits: 0,
                                 set_draw_value: false,
                                 set_hexpand: true,
+                                #[watch]
+                                set_tooltip_text: Some(&format!(
+                                    "{} / {}",
+                                    format_time(model.position),
+                                    format_time(model.duration)
+                                )),
                                 add_css_class: "dock-seek-scale",
 
                                 #[watch]
@@ -353,6 +359,16 @@ fn run_action(model: &mut App, method: &str) {
 thread_local! {
     static THEME_PROVIDER: std::cell::RefCell<Option<gtk::CssProvider>> =
         const { std::cell::RefCell::new(None) };
+}
+
+fn format_time(seconds: f64) -> String {
+    let total = if seconds.is_finite() {
+        seconds.max(0.0) as u64
+    } else {
+        0
+    };
+
+    format!("{:02}:{:02}", total / 60, total % 60)
 }
 
 fn theme_config_path() -> Option<std::path::PathBuf> {
