@@ -54,13 +54,10 @@ impl SimpleComponent for App {
                     set_halign: gtk::Align::Start,
 
                     gtk::Button {
+                        set_icon_name: "view-list-symbolic",
                         set_tooltip_text: Some("Библиотека"),
                         set_size_request: (31, 31),
                         add_css_class: "library-button",
-
-                        gtk::Image {
-                            set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/library.svg")),
-                        },
                     },
                 },
 
@@ -178,10 +175,10 @@ impl SimpleComponent for App {
                                         } @volume_handler,
                                     },
 
-                                    gtk::Box {
-                                        set_size_request: (22, 22),
+                                    gtk::Image {
+                                        set_icon_name: Some("audio-volume-high-symbolic"),
+                                        set_pixel_size: 22,
                                         set_tooltip_text: Some("Громкость"),
-                                        add_css_class: "dock-volume-icon",
                                     },
                                 },
 
@@ -197,19 +194,20 @@ impl SimpleComponent for App {
                                     add_css_class: "dock-transport",
 
                                     gtk::Button {
+                                        set_icon_name: "media-skip-backward-symbolic",
                                         set_tooltip_text: Some("Предыдущий трек"),
                                         set_size_request: (31, 31),
                                         add_css_class: "dock-skip-button",
-
-                                        gtk::Image {
-                                            set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/previous.svg")),
-                                        },
-
                                         connect_clicked => Msg::Previous,
                                     },
 
                                     gtk::Button {
                                         #[watch]
+                                        set_icon_name: if model.status == "Playing" {
+                                            "media-playback-pause-symbolic"
+                                        } else {
+                                            "media-playback-start-symbolic"
+                                        },
                                         set_tooltip_text: Some(if model.status == "Playing" {
                                             "Пауза"
                                         } else {
@@ -217,28 +215,14 @@ impl SimpleComponent for App {
                                         }),
                                         set_size_request: (43, 41),
                                         add_css_class: "dock-play-button",
-
-                                        gtk::Image {
-                                            #[watch]
-                                            set_from_file: Some(if model.status == "Playing" {
-                                                concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/pause.svg")
-                                            } else {
-                                                concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/play.svg")
-                                            }),
-                                        },
-
                                         connect_clicked => Msg::Toggle,
                                     },
 
                                     gtk::Button {
+                                        set_icon_name: "media-skip-forward-symbolic",
                                         set_tooltip_text: Some("Следующий трек"),
                                         set_size_request: (31, 31),
                                         add_css_class: "dock-skip-button",
-
-                                        gtk::Image {
-                                            set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/next.svg")),
-                                        },
-
                                         connect_clicked => Msg::Next,
                                     },
                                 },
@@ -248,14 +232,10 @@ impl SimpleComponent for App {
                                 },
 
                                 gtk::Button {
+                                    set_icon_name: "emblem-system-symbolic",
                                     set_tooltip_text: Some("Настройки"),
                                     set_size_request: (38, 38),
                                     add_css_class: "dock-settings-button",
-
-                                    gtk::Image {
-                                        set_from_file: Some(concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icons/settings.svg")),
-                                    },
-
                                     connect_clicked => Msg::OpenSettings,
                                 },
                             },
