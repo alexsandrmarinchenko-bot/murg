@@ -130,7 +130,7 @@ scale.figma-volume {
 }
 
 scale.figma-seek trough {
-    min-height: 8px;
+    min-height: 5px;
     background-color: #d9d9d9;
     background-image: none;
     border: none;
@@ -139,7 +139,7 @@ scale.figma-seek trough {
 }
 
 scale.figma-seek highlight {
-    min-height: 8px;
+    min-height: 5px;
     background-color: #d9d9d9;
     background-image: none;
     border: none;
@@ -149,19 +149,16 @@ scale.figma-seek highlight {
 
 scale.figma-seek slider {
     min-width: 23px;
-    min-height: 22px;
-    background-color: transparent;
-    background-image: @SEEK_THUMB_URL@;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 23px 22px;
+    min-height: 23px;
+    background-color: #d9d9d9;
+    background-image: none;
     border: none;
-    border-radius: 0;
+    border-radius: 4px;
     box-shadow: none;
 }
 
 scale.figma-seek slider:hover {
-    background-color: #eeeeee;
+    background-color: #d9d9d9;
 }
 
 scale.figma-volume trough,
@@ -251,10 +248,7 @@ fn picture_from_project_file(relative: &str, width: i32, height: i32) -> gtk::Pi
 
 fn install_design_css() {
     let provider = gtk::CssProvider::new();
-    let thumb_path = project_path("Frame-1/assets/image-1cd20f420cbc147e.png");
-    let thumb_url = format!("url(\"file://{}\")", thumb_path.display());
-    let css = DESIGN_CSS.replace("@SEEK_THUMB_URL@", &thumb_url);
-    provider.load_from_data(&css);
+    provider.load_from_data(DESIGN_CSS);
 
     if let Some(display) = gtk::gdk::Display::default() {
         // Slightly above APPLICATION priority so the exported Figma layout remains
@@ -359,7 +353,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
 
     let window = gtk::ApplicationWindow::new(application);
     window.set_title(Some("Murglar Controller"));
-    window.set_default_size(1200, 800);
+    window.set_default_size(1280, 720);
     window.set_size_request(720, 520);
     window.add_css_class("figma-main");
 
@@ -373,8 +367,8 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
 
     // Header: keep the library control near the upper-left corner.
     let header = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    header.set_margin_top(14);
-    header.set_margin_start(10);
+    header.set_margin_top(28);
+    header.set_margin_start(25);
     header.set_halign(gtk::Align::Start);
     header.set_valign(gtk::Align::Start);
 
@@ -387,12 +381,12 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     let library_layers = gtk::Fixed::new();
     library_layers.set_size_request(31, 31);
     library_layers.put(
-        &picture_from_project_file("Frame-1/assets/image-d81a3bd1d543f942.png", 31, 31),
+        &picture_from_project_file("Frame/assets/image-d81a3bd1d543f942.png", 31, 31),
         0.0,
         0.0,
     );
     library_layers.put(
-        &picture_from_project_file("Frame-1/assets/image-99c1e7fe16e3ea5d.png", 22, 18),
+        &picture_from_project_file("Frame/assets/image-99c1e7fe16e3ea5d.png", 22, 18),
         4.47,
         6.30,
     );
@@ -409,9 +403,9 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     // from the actual window allocation. At 1200px this reproduces the export.
     let dock = gtk::Box::new(gtk::Orientation::Vertical, 0);
     dock.set_hexpand(true);
-    dock.set_margin_start(44);
-    dock.set_margin_end(72);
-    dock.set_margin_bottom(30);
+    dock.set_margin_start(25);
+    dock.set_margin_end(26);
+    dock.set_margin_bottom(26);
     dock.add_css_class("player-dock");
 
     let title = gtk::Label::new(Some("название трека"));
@@ -459,14 +453,14 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     controls.add_css_class("figma-controls");
 
     let seek_top_gap = gtk::Box::new(gtk::Orientation::Vertical, 0);
-    seek_top_gap.set_size_request(1, 26);
+    seek_top_gap.set_size_request(1, 24);
     controls.append(&seek_top_gap);
 
     let seek = gtk::Scale::with_range(gtk::Orientation::Horizontal, 0.0, 1.0, 1.0);
     seek.set_draw_value(false);
     seek.set_digits(0);
     seek.set_hexpand(true);
-    seek.set_size_request(1, 22);
+    seek.set_size_request(1, 24);
     seek.set_tooltip_text(Some("Перемотка"));
     seek.add_css_class("figma-seek");
     controls.append(&seek);
@@ -497,7 +491,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     volume_group.append(&volume);
 
     let volume_icon = picture_from_project_file(
-        "Frame-1/assets/image-a7524bd04a5d9478.png",
+        "Frame/assets/image-a7524bd04a5d9478.png",
         38,
         38,
     );
@@ -513,10 +507,10 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     settings.set_size_request(38, 38);
     settings.set_tooltip_text(Some("Настройки"));
     settings.set_focusable(false);
-    settings.set_margin_top(8);
+    settings.set_margin_top(12);
     settings.set_valign(gtk::Align::Start);
     settings.set_child(Some(&picture_from_project_file(
-        "Frame-1/assets/image-cfb10b8456555fd5.png",
+        "Frame/assets/image-cfb10b8456555fd5.png",
         38,
         38,
     )));
@@ -529,8 +523,8 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     let transport = gtk::Box::new(gtk::Orientation::Horizontal, 15);
     transport.set_halign(gtk::Align::Center);
     transport.set_valign(gtk::Align::Start);
-    transport.set_margin_top(8);
-    transport.set_margin_end(40);
+    transport.set_margin_top(7);
+    transport.set_margin_end(122);
     transport.add_css_class("figma-transport");
 
     let previous = gtk::Button::new();
@@ -540,7 +534,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     previous.set_focusable(false);
     previous.set_margin_top(4);
     previous.set_child(Some(&picture_from_project_file(
-        "Frame-1/assets/image-ad9b5a6d06da7dec.png",
+        "Frame/assets/image-ad9b5a6d06da7dec.png",
         31,
         31,
     )));
@@ -554,7 +548,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     let play_layers = gtk::Overlay::new();
     play_layers.set_size_request(43, 41);
     play_layers.set_child(Some(&picture_from_project_file(
-        "Frame-1/assets/image-9e45c6515b00fe78.png",
+        "Frame/assets/image-9e45c6515b00fe78.png",
         43,
         41,
     )));
@@ -591,7 +585,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     next.set_focusable(false);
     next.set_margin_top(4);
     next.set_child(Some(&picture_from_project_file(
-        "Frame-1/assets/image-8c4553e8b0d341b7.png",
+        "Frame/assets/image-8c4553e8b0d341b7.png",
         31,
         31,
     )));
