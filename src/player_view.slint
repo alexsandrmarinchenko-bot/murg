@@ -392,6 +392,12 @@ export component PlayerWindow inherits Window {
                         alignment: start;
                         cross-axis-alignment: stretch;
 
+                        // Match the 23.5px top offset of the exported Figma controls.
+                        Rectangle {
+                            height: 22.5px;
+                            background: transparent;
+                        }
+
                         SeekControl {
                             height: 23px;
                             position_seconds <=> root.position_seconds;
