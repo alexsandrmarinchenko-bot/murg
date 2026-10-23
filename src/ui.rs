@@ -1,6 +1,5 @@
 use std::{
     cell::{Cell, RefCell},
-    path::PathBuf,
     rc::Rc,
     time::Duration,
 };
