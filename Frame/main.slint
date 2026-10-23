@@ -1,166 +1,6 @@
 // import "fonts/inter-regular.ttf";
 
 global Assets {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    out property <image> settings_gear: @image-url("assets/settings-gear.svg");
-    out property <image> settings_gear_pressed: @image-url("assets/settings-gear-pressed.svg");
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-    out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
-    out property <image> unnamed-2: @image-url("assets/image-a71d83b2d743a058.png");
-}
-
-<<<<<<< HEAD
-export component Bibleoteka inherits Rectangle {
-    callback clicked();
-    preferred-width: 36px;
-    preferred-height: 36px;
-
-    // Default / Hover / Pressed appearance from the Figma component set.
-    Rectangle {
-        x: 0px;
-        y: 1px;
-        width: 36px;
-        height: 35px;
-        background: area.pressed ? #2B2B2B : #898989;
-        border-radius: area.pressed ? 5px : 7px;
-        animate background { duration: 150ms; easing: ease-in-out; }
-    }
-    Rectangle {
-        x: 0px;
-        y: 0px;
-        width: 34.875px;
-        height: 34.875px;
-        background: #2B2B2B;
-        border-width: area.has-hover && !area.pressed ? 1px : 0px;
-        border-color: #FFFFFF;
-        border-radius: 5px;
-        animate border-width { duration: 150ms; easing: ease-in-out; }
-    }
-    Rectangle {
-        x: area.pressed ? 5px : 6px;
-        y: area.pressed ? 7px : 9px;
-        width: area.pressed ? 26px : 25px;
-        height: area.pressed ? 5px : 3px;
-        background: area.pressed ? #FFFFFF : #D9D9D9;
-        animate x, y, width, height, background {
-            duration: 150ms;
-            easing: ease-in-out;
-        }
-    }
-    Rectangle {
-        x: area.pressed ? 5px : 6px;
-        y: area.pressed ? 15px : 17px;
-        width: area.pressed ? 26px : 25px;
-        height: area.pressed ? 5px : 3px;
-        background: area.pressed ? #FFFFFF : #D9D9D9;
-        animate x, y, width, height, background {
-            duration: 150ms;
-            easing: ease-in-out;
-        }
-    }
-    Rectangle {
-        x: area.pressed ? 5px : 6px;
-        y: area.pressed ? 23px : 25px;
-        width: area.pressed ? 26px : 25px;
-        height: area.pressed ? 5px : 3px;
-        background: area.pressed ? #FFFFFF : #D9D9D9;
-        animate x, y, width, height, background {
-            duration: 150ms;
-            easing: ease-in-out;
-        }
-    }
-    area := TouchArea {
-        width: parent.width;
-        height: parent.height;
-        clicked => { root.clicked(); }
-    }
-}
-
-export component SettingsButton inherits Rectangle {
-    callback clicked();
-    preferred-width: 36px;
-    preferred-height: 36px;
-
-    Rectangle {
-        x: 0px;
-        y: 1px;
-        width: 36px;
-        height: 35px;
-        background: area.pressed ? #2B2B2B : #898989;
-        border-radius: area.pressed ? 5px : 7px;
-        animate background { duration: 150ms; easing: ease-in-out; }
-    }
-    Rectangle {
-        x: 0px;
-        y: 0px;
-        width: 34.875px;
-        height: 34.875px;
-        background: #2B2B2B;
-        border-width: area.has-hover && !area.pressed ? 1px : 0px;
-        border-color: #FFFFFF;
-        border-radius: 5px;
-        animate border-width { duration: 150ms; easing: ease-in-out; }
-    }
-
-    // Use a crisp vector gear instead of separately positioned tooth rectangles.
-    // The 27px SVG keeps the outline close to the proportions of the Figma button.
-    Image {
-        x: 4.5px;
-        y: 4.5px;
-        width: 27px;
-        height: 27px;
-        source: Assets.settings_gear;
-        image-fit: contain;
-        opacity: area.pressed ? 0.0 : 1.0;
-        animate opacity { duration: 100ms; easing: ease-in-out; }
-    }
-    Image {
-        x: 4.5px;
-        y: 4.5px;
-        width: 27px;
-        height: 27px;
-        source: Assets.settings_gear_pressed;
-        image-fit: contain;
-        opacity: area.pressed ? 1.0 : 0.0;
-        animate opacity { duration: 100ms; easing: ease-in-out; }
-    }
-
-    area := TouchArea {
-        width: parent.width;
-        height: parent.height;
-        clicked => { root.clicked(); }
-    }
-}
-
-export component Unnamed inherits Rectangle {
-    in-out property <float> value: 8;
-    callback drag_started();
-    callback drag_finished();
-    callback changed(float);
-=======
-    out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
-    out property <image> unnamed-2: @image-url("assets/image-a71d83b2d743a058.png");
-    out property <image> ellipse-1: @image-url("assets/image-07ea07be91459e52.png");
-    out property <image> icon: @image-url("assets/image-a8834c89f15a6e4b.svg");
-    out property <image> vector-3: @image-url("assets/image-15f939aa8226c39b.png");
-    out property <image> vector-4: @image-url("assets/image-56eaf140fb8d44ed.png");
-    out property <image> vector-5: @image-url("assets/image-a8a9c628e627326c.png");
-    out property <image> vector-6: @image-url("assets/image-82aac3d8023dc963.png");
-    out property <image> vector-7: @image-url("assets/image-78bf9932e0d428c6.png");
-    out property <image> vector-8: @image-url("assets/image-7154fe93885b3bdb.png");
-    out property <image> vector-9: @image-url("assets/image-7828a3166dc29fbc.png");
-    out property <image> icon-2: @image-url("assets/image-08dd4f984bc692b6.png");
-}
-
-export component Unnamed inherits Rectangle {
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-export component Unnamed inherits Rectangle {
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
     out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
     out property <image> unnamed-2: @image-url("assets/image-a71d83b2d743a058.png");
     out property <image> polygon-2: @image-url("assets/image-d149f636284e1f21.png");
@@ -169,24 +9,12 @@ export component Unnamed inherits Rectangle {
 }
 
 export component Unnamed inherits Rectangle {
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     preferred-width: 68px;
     preferred-height: 23px;
     Image {
         height: 5px;
         image-fit: fill;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         image-rendering: pixelated;
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-        image-rendering: pixelated;
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-        image-rendering: pixelated;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         source: Assets.unnamed;
         width: 68px;
         x: 0px;
@@ -195,51 +23,6 @@ export component Unnamed inherits Rectangle {
     Image {
         height: 23px;
         image-fit: fill;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        source: Assets.unnamed-2;
-        width: 23px;
-        x: 3px + max(0px, root.width - 26px) * (root.value / 100.0);
-        y: 0px;
-    }
-    area := TouchArea {
-        width: parent.width;
-        height: parent.height;
-        moved => {
-            if (self.pressed) {
-                root.value = max(0.0, min(100.0,
-                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * 100.0));
-            }
-        }
-        pointer-event(event) => {
-            if (event.kind == PointerEventKind.down) {
-                root.drag_started();
-            }
-            if (event.kind == PointerEventKind.up) {
-                root.value = max(0.0, min(100.0,
-                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * 100.0));
-                root.changed(root.value);
-                root.drag_finished();
-            }
-            if (event.kind == PointerEventKind.cancel) {
-                root.drag_finished();
-            }
-        }
-    }
-}
-
-export component ShkalaVremeni inherits Rectangle {
-    in-out property <float> position_seconds: 0;
-    in property <float> duration_seconds: 1;
-    callback drag_started();
-    callback drag_cancelled();
-    callback committed(float);
-=======
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         image-rendering: pixelated;
         source: Assets.unnamed-2;
         width: 23px;
@@ -249,31 +32,12 @@ export component ShkalaVremeni inherits Rectangle {
 }
 
 export component ShkalaVremeni inherits Rectangle {
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     preferred-width: 1106px;
     preferred-height: 23px;
     Rectangle {
         background: #D9D9D9;
         height: 5px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        width: parent.width;
-=======
         width: 1106px;
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-        width: 1106px;
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-        width: 1106px;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         x: 0px;
         y: 9px;
     }
@@ -282,87 +46,11 @@ export component ShkalaVremeni inherits Rectangle {
         border-radius: 4px;
         height: 23px;
         width: 23px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        x: 3px + max(0px, root.width - self.width - 3px) *
-            min(1.0, max(0.0, root.position_seconds / max(root.duration_seconds, 1.0)));
-        y: 0px;
-    }
-    area := TouchArea {
-        width: parent.width;
-        height: parent.height;
-        moved => {
-            if (self.pressed) {
-                root.position_seconds = max(0.0, min(root.duration_seconds,
-                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * root.duration_seconds));
-            }
-        }
-        pointer-event(event) => {
-            if (event.kind == PointerEventKind.down) {
-                root.drag_started();
-            }
-            if (event.kind == PointerEventKind.up) {
-                root.position_seconds = max(0.0, min(root.duration_seconds,
-                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * root.duration_seconds));
-                root.committed(root.position_seconds);
-            }
-            if (event.kind == PointerEventKind.cancel) {
-                root.drag_cancelled();
-            }
-        }
-    }
-}
-
-export component Demo inherits Window {
-    in-out property <string> track_title: "название трека";
-    in-out property <string> artist_name: "исполнитель";
-    in-out property <float> position_seconds: 0;
-    in-out property <float> duration_seconds: 1;
-    in-out property <float> volume_percent: 8;
-    in-out property <bool> is_playing: false;
-    in-out property <image> cover_art;
-    in-out property <string> status_message: "";
-
-    callback library_clicked();
-    callback settings_clicked();
-    callback previous_clicked();
-    callback play_clicked();
-    callback next_clicked();
-    callback seek_drag_started();
-    callback seek_drag_cancelled();
-    callback seek_committed(float);
-    callback volume_drag_started();
-    callback volume_drag_finished();
-    callback volume_changed(float);
-
-    preferred-width: 1280px;
-    preferred-height: 720px;
-    min-width: 480px;
-    min-height: 270px;
-    title: "Murglar Controller";
-    background: #202020;
-    Rectangle {
-        x: 0px;
-        y: 0px;
-        width: parent.width;
-        height: parent.height;
-=======
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         x: 3px;
         y: 0px;
     }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-export enum Unnamed2Property1 { default }
-export component Unnamed2 inherits Rectangle {
-    in property <Unnamed2Property1> variant-property-1: Unnamed2Property1.default;
-=======
 export enum NextProperty1 { default }
 export component Next inherits Rectangle {
     in property <NextProperty1> variant-property-1: NextProperty1.default;
@@ -396,7 +84,6 @@ export component Next inherits Rectangle {
 export enum PauseProperty1 { default }
 export component Pause inherits Rectangle {
     in property <PauseProperty1> variant-property-1: PauseProperty1.default;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     preferred-width: 36px;
     preferred-height: 36px;
     Rectangle {
@@ -412,112 +99,6 @@ export component Pause inherits Rectangle {
         y: 0px;
     }
     Image {
-<<<<<<< HEAD
-        height: 11.25px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.ellipse-1;
-        width: 11.25px;
-        x: 12.375px;
-        y: 12.375px;
-    }
-    Rectangle {
-        height: 6.75px;
-        width: 2.25px;
-        x: 6.75px;
-        y: 14.625px;
-        Image {
-            height: 7.75px;
-            image-fit: fill;
-            source: Assets.icon;
-            width: 3.25px;
-            x: -0.5px;
-            y: -0.5px;
-        }
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-3;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 180deg;
-        width: 2.25px;
-        x: 29.25px;
-        y: 21.375px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-4;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 90deg;
-        width: 2.25px;
-        x: 21.375px;
-        y: 6.75px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-5;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: -90deg;
-        width: 2.25px;
-        x: 14.625px;
-        y: 29.25px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-6;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 45deg;
-        width: 2.25px;
-        x: 12.432px;
-        y: 7.659px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-7;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: -135deg;
-        width: 2.25px;
-        x: 23.568px;
-        y: 28.341px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-8;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 135deg;
-        width: 2.25px;
-        x: 28.341px;
-        y: 12.432px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-9;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: -45deg;
-        width: 2.25px;
-        x: 7.659px;
-        y: 23.568px;
-    }
-}
-
-component Unnamed2Override inherits Rectangle {
-    preferred-width: 36px;
-    preferred-height: 36px;
-=======
         height: 24px;
         image-fit: fill;
         image-rendering: pixelated;
@@ -535,7 +116,6 @@ export component Back inherits Rectangle {
     in property <BackProperty1> variant-property-1: BackProperty1.default;
     preferred-width: 26px;
     preferred-height: 26px;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     Rectangle {
         background: #898989;
         border-radius: 7px;
@@ -543,122 +123,12 @@ export component Back inherits Rectangle {
     Rectangle {
         background: #2B2B2B;
         border-radius: 5px;
-<<<<<<< HEAD
-        height: 34.875px;
-        width: 34.875px;
-=======
         height: 25px;
         width: 25px;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         x: 0px;
         y: 0px;
     }
     Image {
-<<<<<<< HEAD
-        height: 11.25px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.ellipse-1;
-        width: 11.25px;
-        x: 12.375px;
-        y: 12.375px;
-    }
-    Rectangle {
-        height: 6.75px;
-        width: 2.25px;
-        x: 6.75px;
-        y: 14.625px;
-        Image {
-            height: 7.75px;
-            image-fit: fill;
-            source: Assets.icon-2;
-            width: 3.25px;
-            x: -0.5px;
-            y: -0.5px;
-        }
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-3;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 180deg;
-        width: 2.25px;
-        x: 29.25px;
-        y: 21.375px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-4;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 90deg;
-        width: 2.25px;
-        x: 21.375px;
-        y: 6.75px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-5;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: -90deg;
-        width: 2.25px;
-        x: 14.625px;
-        y: 29.25px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-6;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 45deg;
-        width: 2.25px;
-        x: 12.432px;
-        y: 7.659px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-7;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: -135deg;
-        width: 2.25px;
-        x: 23.568px;
-        y: 28.341px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-8;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: 135deg;
-        width: 2.25px;
-        x: 28.341px;
-        y: 12.432px;
-    }
-    Image {
-        height: 6.75px;
-        image-fit: fill;
-        image-rendering: pixelated;
-        source: Assets.vector-9;
-        transform-origin: { x: 0px, y: 0px };
-        transform-rotation: -45deg;
-        width: 2.25px;
-        x: 7.659px;
-        y: 23.568px;
-    }
-}
-
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
         height: 19px;
         image-fit: fill;
         image-rendering: pixelated;
@@ -671,168 +141,14 @@ export component Back inherits Rectangle {
     }
 }
 
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
 export component Demo inherits Window {
     width: 1280px;
     height: 720px;
     background: transparent;
     Rectangle {
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-        background: #202020;
-        clip: true;
-        Rectangle {
-            x: 25px;
-<<<<<<< HEAD
-            y: parent.height - 122px;
-            width: parent.width - 51px;
-            height: 96px;
-            FlexboxLayout {
-                width: parent.width;
-                height: parent.height;
-                flex-wrap: no-wrap;
-                spacing: 27px;
-                alignment: space-between;
-                cross-axis-alignment: center;
-                Rectangle {
-                    width: 96px;
-                    height: 96px;
-                    background: #D9D9D9;
-                    border-radius: 10px;
-                    clip: true;
-                    Image {
-                        width: parent.width;
-                        height: parent.height;
-                        source: root.cover_art;
-                        image-fit: cover;
-                    }
-                }
-                Rectangle {
-                    width: parent.width - 123px;
-                    height: 73px;
-                    FlexboxLayout {
-                        width: parent.width;
-                        height: parent.height;
-                        flex-direction: column;
-                        flex-wrap: no-wrap;
-                        spacing: 1px;
-                        alignment: center;
-                        cross-axis-alignment: center;
-                        ShkalaVremeni {
-                            preferred-width: 1106px;
-                            min-width: 0px;
-                            cross-axis-self-alignment: stretch;
-                            horizontal-stretch: 0;
-                            height: 23px;
-                            position_seconds <=> root.position_seconds;
-                            duration_seconds: root.duration_seconds;
-                            drag_started => { root.seek_drag_started(); }
-                            drag_cancelled => { root.seek_drag_cancelled(); }
-                            committed(seconds) => { root.seek_committed(seconds); }
-                        }
-                        Rectangle {
-                            preferred-width: parent.width;
-                            min-width: 0px;
-                            cross-axis-self-alignment: stretch;
-                            horizontal-stretch: 0;
-                            height: 48.5px;
-                            Rectangle {
-                                x: 0px;
-                                y: 10.5px;
-                                width: 112px;
-                                height: 38px;
-                                FlexboxLayout {
-                                    flex-wrap: no-wrap;
-                                    spacing: 6px;
-                                    cross-axis-alignment: center;
-                                    Unnamed {
-                                        width: 68px;
-                                        height: 23px;
-                                        value <=> root.volume_percent;
-                                        drag_started => { root.volume_drag_started(); }
-                                        drag_finished => { root.volume_drag_finished(); }
-                                        changed(value) => { root.volume_changed(value); }
-                                    }
-                                    Image {
-                                        width: 38px;
-                                        height: 38px;
-                                        source: @image-url("assets/image-a7524bd04a5d9478.png");
-                                        image-fit: fill;
-                                    }
-                                }
-                            }
-                            Rectangle {
-                                x: (parent.width - 135px) / 2 + 40.5px;
-                                y: 0px;
-                                width: 135px;
-                                height: 41px;
-                                Image {
-                                    x: 0px;
-                                    y: 5px;
-                                    width: 31px;
-                                    height: 31px;
-                                    source: @image-url("assets/image-ad9b5a6d06da7dec.png");
-                                    image-fit: fill;
-                                }
-                                Image {
-                                    x: 46px;
-                                    y: 0px;
-                                    width: 43px;
-                                    height: 41px;
-                                    source: @image-url("assets/image-9e45c6515b00fe78.png");
-                                    image-fit: fill;
-                                }
-                                Image {
-                                    x: 104px;
-                                    y: 5px;
-                                    width: 31px;
-                                    height: 31px;
-                                    source: @image-url("assets/image-8c4553e8b0d341b7.png");
-                                    image-fit: fill;
-                                }
-                                TouchArea {
-                                    x: 0px;
-                                    y: 0px;
-                                    width: 31px;
-                                    height: 41px;
-                                    clicked => { root.previous_clicked(); }
-                                }
-                                TouchArea {
-                                    x: 46px;
-                                    y: 0px;
-                                    width: 43px;
-                                    height: 41px;
-                                    clicked => { root.play_clicked(); }
-                                }
-                                TouchArea {
-                                    x: 104px;
-                                    y: 0px;
-                                    width: 31px;
-                                    height: 41px;
-                                    clicked => { root.next_clicked(); }
-                                }
-                            }
-                            SettingsButton {
-                                x: parent.width - 43px;
-                                y: 5px;
-                                width: 36px;
-                                height: 36px;
-                                clicked => { root.settings_clicked(); }
-                            }
-                        }
-                    }
-=======
-=======
         background: #202020;
         Rectangle {
             x: 25px;
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-        background: #202020;
-        Rectangle {
-            x: 25px;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             y: 598px;
             width: 1229px;
             height: 96px;
@@ -887,41 +203,6 @@ export component Demo inherits Window {
                         y: 0px;
                         width: 135px;
                         height: 41px;
-<<<<<<< HEAD
-                        Image {
-                            x: 0px;
-                            y: 5px;
-                            width: 31px;
-                            height: 31px;
-                            source: @image-url("assets/image-ad9b5a6d06da7dec.png");
-                            image-fit: fill;
-                            image-rendering: pixelated;
-                        }
-                        Image {
-                            x: 46px;
-                            y: 0px;
-                            width: 43px;
-                            height: 41px;
-                            source: @image-url("assets/image-9e45c6515b00fe78.png");
-                            image-fit: fill;
-                            image-rendering: pixelated;
-                        }
-                        Image {
-                            x: 104px;
-                            y: 5px;
-                            width: 31px;
-                            height: 31px;
-                            source: @image-url("assets/image-8c4553e8b0d341b7.png");
-                            image-fit: fill;
-                            image-rendering: pixelated;
-                        }
-                    }
-<<<<<<< HEAD
-                    Unnamed2Override {
-=======
-                    Rectangle {
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
                         Pause {
                             x: 50px;
                             y: 2.75px;
@@ -942,18 +223,10 @@ export component Demo inherits Window {
                         }
                     }
                     Rectangle {
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                         x: 1063px;
                         y: 5px;
                         width: 36px;
                         height: 36px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    }
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                         clip: true;
                         Rectangle {
                             background: #898989;
@@ -1068,28 +341,12 @@ export component Demo inherits Window {
                             image-rendering: pixelated;
                         }
                     }
-<<<<<<< HEAD
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 }
             }
         }
         Rectangle {
             x: 25px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            y: parent.height - 172px;
-=======
             y: 548px;
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-            y: 548px;
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-            y: 548px;
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -1099,19 +356,7 @@ export component Demo inherits Window {
                 height: parent.height;
                 opacity: 0;
                 color: #C3C3C3;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                text: root.track_title;
-=======
                 text: "название трека";
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-                text: "название трека";
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-                text: "название трека";
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -1126,19 +371,7 @@ export component Demo inherits Window {
                 x: (self.preferred-width - self.width) / 2;
                 y: (self.preferred-height - self.height) / 2;
                 color: #C3C3C3;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                text: root.track_title;
-=======
                 text: "название трека";
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-                text: "название трека";
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-                text: "название трека";
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -1153,19 +386,7 @@ export component Demo inherits Window {
                 height: parent.height + 2px * ceil(max(0px, figma-overflow-1-measure.preferred-height - parent.height) / 2px + 0.091);
                 y: (figma-overflow-1-measure.preferred-height - self.height) / 2;
                 color: #C3C3C3;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                text: root.track_title;
-=======
                 text: "название трека";
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-                text: "название трека";
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-                text: "название трека";
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -1177,31 +398,11 @@ export component Demo inherits Window {
         }
         Text {
             x: 25px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            y: parent.height - 146px;
-            width: 154px;
-            height: 16px;
-            color: #FFFFFF;
-            text: root.artist_name;
-=======
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             y: 574px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
             text: "исполнитель";
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             font-family: "Inter";
             font-size: 15px;
             font-weight: 400;
@@ -1209,45 +410,11 @@ export component Demo inherits Window {
             letter-spacing: 0.15px;
             wrap: word-wrap;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        Bibleoteka {
-=======
         Rectangle {
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
-        Rectangle {
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
-        Rectangle {
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             x: 17px;
             y: 12px;
             width: 36px;
             height: 36px;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            clicked => { root.library_clicked(); }
-        }
-        Text {
-            x: 25px;
-            y: 64px;
-            width: min(parent.width - 50px, 900px);
-            height: 20px;
-            visible: root.status_message != "";
-            text: root.status_message;
-            color: #C3C3C3;
-            font-family: "Inter";
-            font-size: 11px;
-            overflow: elide;
-            max-lines: 1;
-=======
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             Rectangle {
                 x: 0px;
                 y: 1px;
@@ -1285,13 +452,6 @@ export component Demo inherits Window {
                 height: 3px;
                 background: #D9D9D9;
             }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
-=======
->>>>>>> 252999d (23 окт. 2026 г., 21:42)
-=======
->>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         }
     }
 }
