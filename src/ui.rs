@@ -16,7 +16,7 @@ window.figma-main {
     color: #c3c3c3;
 }
 
-.design-canvas {
+box.design-canvas {
     background-color: #202020;
     background-image: none;
     color: #c3c3c3;
@@ -403,19 +403,18 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     window.set_size_request(720, 520);
     window.add_css_class("figma-main");
 
-    // Use a fixed coordinate canvas like the 1280x720 Figma artboard.
-    // GtkBox spacing/margins can be compressed and shift unrelated elements,
-    // so each top-level widget is anchored directly to the canvas.
-    let root = gtk::Fixed::new();
+    // Restore the previous responsive layout: the player dock sits near the
+    // bottom, as it did before the fixed-canvas experiment.
+    let root = gtk::Box::new(gtk::Orientation::Vertical, 0);
     root.set_hexpand(true);
     root.set_vexpand(true);
-    root.set_size_request(1280, 720);
     root.add_css_class("design-canvas");
     window.set_child(Some(&root));
 
-    // Library control: exact Figma position x=25, y=28.
+    // Header: keep the library control near the upper-left corner.
     let header = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    header.set_size_request(31, 31);
+    header.set_margin_top(28);
+    header.set_margin_start(25);
     header.set_halign(gtk::Align::Start);
     header.set_valign(gtk::Align::Start);
 
@@ -439,13 +438,20 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     );
     library.set_child(Some(&library_layers));
     header.append(&library);
-    root.put(&header, 25.0, 28.0);
+    root.append(&header);
 
-    // Dock begins at y=548; its children align with the Figma coordinates:
-    // title y=548, artist y=574, cover y=598, seek y=622.
+    // Responsive spacer restores the earlier layout where the player controls
+    // were slightly higher; GTK places the dock relative to the window height.
+    let spacer = gtk::Box::new(gtk::Orientation::Vertical, 0);
+    spacer.set_hexpand(true);
+    spacer.set_vexpand(true);
+    root.append(&spacer);
+
     let dock = gtk::Box::new(gtk::Orientation::Vertical, 0);
-    dock.set_size_request(1229, 146);
     dock.set_hexpand(true);
+    dock.set_margin_start(25);
+    dock.set_margin_end(26);
+    dock.set_margin_bottom(26);
     dock.add_css_class("player-dock");
 
     let title = gtk::Label::new(Some("название трека"));
@@ -635,7 +641,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     controls.append(&action_row);
     main_row.append(&controls);
     dock.append(&main_row);
-    root.put(&dock, 25.0, 548.0);
+    root.append(&dock);
 
     let status = gtk::Label::new(None);
     status.set_halign(gtk::Align::Start);
@@ -646,8 +652,10 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     status.set_size_request(900, 16);
     status.add_css_class("figma-status");
     status.set_visible(false);
-    // Display diagnostic messages above the track title when an action fails.
-    root.put(&status, 44.0, 527.0);
+    status.set_margin_start(44);
+    status.set_margin_bottom(8);
+    // Add diagnostic text above the track title only when an action fails.
+    root.insert_child_after(&status, Some(&spacer));
 
     let snapshot = Rc::new(RefCell::new(PlayerSnapshot::default()));
     let ui = UiWidgets {
