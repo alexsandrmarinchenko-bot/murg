@@ -246,7 +246,6 @@ pub fn run() -> Result<(), slint::PlatformError> {
         });
     }
 
-
     refresh_player(
         &window_weak,
         &snapshot,
