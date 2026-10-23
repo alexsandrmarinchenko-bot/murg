@@ -12,7 +12,7 @@ global Assets {
     out property <image> next_icon: @image-url("../Frame/assets/image-8c4553e8b0d341b7.png");
 }
 
-export component LibraryControl inherits Rectangle {
+component LibraryControl inherits Rectangle {
     callback clicked();
     preferred-width: 31px;
     preferred-height: 31px;
@@ -48,7 +48,7 @@ export component LibraryControl inherits Rectangle {
     }
 }
 
-export component SeekControl inherits Rectangle {
+component SeekControl inherits Rectangle {
     in-out property <float> position_seconds: 0;
     in property <float> duration_seconds: 1;
     callback drag_started();
@@ -99,7 +99,7 @@ export component SeekControl inherits Rectangle {
     }
 }
 
-export component VolumeControl inherits Rectangle {
+component VolumeControl inherits Rectangle {
     in-out property <float> value: 8;
     callback drag_started();
     callback drag_finished();
@@ -160,7 +160,7 @@ export component VolumeControl inherits Rectangle {
     }
 }
 
-export component TransportControl inherits Rectangle {
+component TransportControl inherits Rectangle {
     in property <bool> is_playing: false;
     callback previous_clicked();
     callback play_clicked();
@@ -243,7 +243,7 @@ export component TransportControl inherits Rectangle {
     }
 }
 
-export component SettingsControl inherits Rectangle {
+component SettingsControl inherits Rectangle {
     callback clicked();
     preferred-width: 31px;
     preferred-height: 48.5px;
@@ -290,8 +290,8 @@ export component PlayerWindow inherits Window {
     callback volume_changed(float);
     callback theme_changed(string);
 
-    width: 1280px;
-    height: 720px;
+    preferred-width: 1280px;
+    preferred-height: 720px;
     min-width: 720px;
     min-height: 520px;
     title: "Murglar Controller";
@@ -308,8 +308,6 @@ export component PlayerWindow inherits Window {
             : #202020;
 
         VerticalLayout {
-            width: parent.width;
-            height: parent.height;
             padding-left: 25px;
             padding-right: 26px;
             padding-top: 28px;
@@ -395,7 +393,6 @@ export component PlayerWindow inherits Window {
                         cross-axis-alignment: stretch;
 
                         SeekControl {
-                            width: parent.width;
                             height: 23px;
                             position_seconds <=> root.position_seconds;
                             duration_seconds: root.duration_seconds;
@@ -405,7 +402,6 @@ export component PlayerWindow inherits Window {
                         }
 
                         HorizontalLayout {
-                            width: parent.width;
                             height: 48.5px;
                             spacing: 0px;
                             alignment: space-between;
