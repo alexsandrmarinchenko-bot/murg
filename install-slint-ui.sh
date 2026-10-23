@@ -22,12 +22,17 @@ die() {
 [[ -d "$PROJECT_DIR" ]] || die "Не найден проект: $PROJECT_DIR"
 [[ -f "$PROJECT_DIR/Cargo.toml" ]] || die "Не найден Cargo.toml"
 [[ -f "$TARGET_FILE" ]] || die "Не найден src/ui.rs"
-if [[ -f "$PROJECT_DIR/Frame/main.slint" ]]; then
-    ASSET_DIR="$PROJECT_DIR/Frame/assets"
-elif [[ -f "$PROJECT_DIR/Frame-1/main.slint" ]]; then
+if [[ -f "$PROJECT_DIR/Frame-1/main.slint" \
+   && -s "$PROJECT_DIR/Frame-1/assets/image-49194f4ab8df0950.png" \
+   && -s "$PROJECT_DIR/Frame-1/assets/image-a71d83b2d743a058.png" ]]; then
+    # Prefer the latest export when both the old Frame and new Frame-1 exist.
     ASSET_DIR="$PROJECT_DIR/Frame-1/assets"
+elif [[ -f "$PROJECT_DIR/Frame/main.slint" \
+   && -s "$PROJECT_DIR/Frame/assets/image-49194f4ab8df0950.png" \
+   && -s "$PROJECT_DIR/Frame/assets/image-a71d83b2d743a058.png" ]]; then
+    ASSET_DIR="$PROJECT_DIR/Frame/assets"
 else
-    die "Не найден Frame/main.slint или Frame-1/main.slint. Сначала синхронизируй Figma-экспорт."
+    die "Не найден актуальный Figma-экспорт с image-49194f4ab8df0950.png и image-a71d83b2d743a058.png в Frame/ или Frame-1/."
 fi
 
 for asset in \
@@ -37,7 +42,8 @@ for asset in \
     image-9e45c6515b00fe78.png \
     image-ad9b5a6d06da7dec.png \
     image-8c4553e8b0d341b7.png \
-    image-cfb10b8456555fd5.png
+    image-49194f4ab8df0950.png \
+    image-a71d83b2d743a058.png
 do
     [[ -s "$ASSET_DIR/$asset" ]] || die "Не найден ресурс $ASSET_DIR/$asset"
 done
@@ -49,16 +55,18 @@ TIMESTAMP="$(date +%Y%m%d-%H%M%S)"
 BACKUP_FILE="$BACKUP_ROOT/ui.rs.$TIMESTAMP.bak"
 TMP_FILE="$(mktemp "$PROJECT_DIR/src/.ui.rs.download.XXXXXX")"
 
-printf 'Скачиваю интерфейс, подогнанный под Frame/main.slint...\n'
+printf 'Скачиваю интерфейс, подогнанный под последний Figma-экспорт...\n'
 curl --fail --location --silent --show-error --retry 3 --connect-timeout 15 \
     "$RAW_URL" --output "$TMP_FILE"
 grep -Fq 'set_default_size(1280, 720)' "$TMP_FILE" || die "Проверка версии не пройдена."
-grep -Fq '"Frame/assets/' "$TMP_FILE" || die "В коде нет путей к новым ассетам."
-if grep -Fq 'Frame-1/assets/' "$TMP_FILE"; then
-    die "В скачанном коде обнаружены устаревшие пути Frame-1."
+grep -Fq '"Frame/assets/' "$TMP_FILE" || die "В коде нет путей к ассетам."
+grep -Fq 'image-49194f4ab8df0950.png' "$TMP_FILE" || die "В коде отсутствует новая дорожка громкости."
+grep -Fq 'image-a71d83b2d743a058.png' "$TMP_FILE" || die "В коде отсутствует новый бегунок громкости."
+if grep -Fq 'image-cfb10b8456555fd5.png' "$TMP_FILE"; then
+    die "Код ссылается на удалённую иконку настроек."
 fi
 if grep -Fq 'image-1cd20f420cbc147e.png' "$TMP_FILE"; then
-    die "Код ссылается на отсутствующий бегунок."
+    die "Код ссылается на устаревшее изображение бегунка."
 fi
 
 cp -a -- "$TARGET_FILE" "$BACKUP_FILE"
@@ -72,7 +80,7 @@ printf 'Резервная копия: %s\n' "$BACKUP_FILE"
 printf 'Проверяю сборку (cargo check --locked)...\n'
 
 if (cd -- "$PROJECT_DIR" && cargo check --locked); then
-    printf '\nГотово: интерфейс обновлён под макет 1280×720, сборка успешна.\n'
+    printf '\nГотово: интерфейс обновлён под последний экспорт 1280×720, сборка успешна.\n'
     printf 'Запуск: cd "%s" && CARGO_HOME="%s" cargo run --locked\n' "$PROJECT_DIR" "$CARGO_HOME"
     printf 'Резервная копия: %s\n' "$BACKUP_FILE"
 else
