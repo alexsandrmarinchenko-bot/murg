@@ -246,10 +246,6 @@ pub fn run() -> Result<(), slint::PlatformError> {
         });
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 4524bb6 (23 окт. 2026 г., 22:18)
     refresh_player(
         &window_weak,
         &snapshot,
