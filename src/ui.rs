@@ -130,7 +130,7 @@ scale.figma-volume {
 }
 
 scale.figma-seek trough {
-    min-height: 8px;
+    min-height: 5px;
     background-color: #d9d9d9;
     background-image: none;
     border: none;
@@ -139,7 +139,7 @@ scale.figma-seek trough {
 }
 
 scale.figma-seek highlight {
-    min-height: 8px;
+    min-height: 5px;
     background-color: #d9d9d9;
     background-image: none;
     border: none;
@@ -149,7 +149,7 @@ scale.figma-seek highlight {
 
 scale.figma-seek slider {
     min-width: 23px;
-    min-height: 22px;
+    min-height: 23px;
     background-color: #d9d9d9;
     background-image: none;
     border: none;
@@ -158,7 +158,7 @@ scale.figma-seek slider {
 }
 
 scale.figma-seek slider:hover {
-    background-color: #eeeeee;
+    background-color: #d9d9d9;
 }
 
 scale.figma-volume trough,
