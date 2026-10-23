@@ -1,6 +1,7 @@
 // import "fonts/inter-regular.ttf";
 
 global Assets {
+<<<<<<< HEAD
     out property <image> settings_gear: @image-url("assets/settings-gear.svg");
     out property <image> settings_gear_pressed: @image-url("assets/settings-gear-pressed.svg");
     out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
@@ -134,11 +135,32 @@ export component Unnamed inherits Rectangle {
     callback drag_started();
     callback drag_finished();
     callback changed(float);
+=======
+    out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
+    out property <image> unnamed-2: @image-url("assets/image-a71d83b2d743a058.png");
+    out property <image> ellipse-1: @image-url("assets/image-07ea07be91459e52.png");
+    out property <image> icon: @image-url("assets/image-a8834c89f15a6e4b.svg");
+    out property <image> vector-3: @image-url("assets/image-15f939aa8226c39b.png");
+    out property <image> vector-4: @image-url("assets/image-56eaf140fb8d44ed.png");
+    out property <image> vector-5: @image-url("assets/image-a8a9c628e627326c.png");
+    out property <image> vector-6: @image-url("assets/image-82aac3d8023dc963.png");
+    out property <image> vector-7: @image-url("assets/image-78bf9932e0d428c6.png");
+    out property <image> vector-8: @image-url("assets/image-7154fe93885b3bdb.png");
+    out property <image> vector-9: @image-url("assets/image-7828a3166dc29fbc.png");
+    out property <image> icon-2: @image-url("assets/image-08dd4f984bc692b6.png");
+}
+
+export component Unnamed inherits Rectangle {
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
     preferred-width: 68px;
     preferred-height: 23px;
     Image {
         height: 5px;
         image-fit: fill;
+<<<<<<< HEAD
+=======
+        image-rendering: pixelated;
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
         source: Assets.unnamed;
         width: 68px;
         x: 0px;
@@ -147,6 +169,7 @@ export component Unnamed inherits Rectangle {
     Image {
         height: 23px;
         image-fit: fill;
+<<<<<<< HEAD
         source: Assets.unnamed-2;
         width: 23px;
         x: 3px + max(0px, root.width - 26px) * (root.value / 100.0);
@@ -184,12 +207,27 @@ export component ShkalaVremeni inherits Rectangle {
     callback drag_started();
     callback drag_cancelled();
     callback committed(float);
+=======
+        image-rendering: pixelated;
+        source: Assets.unnamed-2;
+        width: 23px;
+        x: 3px;
+        y: 0px;
+    }
+}
+
+export component ShkalaVremeni inherits Rectangle {
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
     preferred-width: 1106px;
     preferred-height: 23px;
     Rectangle {
         background: #D9D9D9;
         height: 5px;
+<<<<<<< HEAD
         width: parent.width;
+=======
+        width: 1106px;
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
         x: 0px;
         y: 9px;
     }
@@ -198,6 +236,7 @@ export component ShkalaVremeni inherits Rectangle {
         border-radius: 4px;
         height: 23px;
         width: 23px;
+<<<<<<< HEAD
         x: 3px + max(0px, root.width - self.width - 3px) *
             min(1.0, max(0.0, root.position_seconds / max(root.duration_seconds, 1.0)));
         y: 0px;
@@ -260,10 +299,259 @@ export component Demo inherits Window {
         y: 0px;
         width: parent.width;
         height: parent.height;
+=======
+        x: 3px;
+        y: 0px;
+    }
+}
+
+export enum Unnamed2Property1 { default }
+export component Unnamed2 inherits Rectangle {
+    in property <Unnamed2Property1> variant-property-1: Unnamed2Property1.default;
+    preferred-width: 36px;
+    preferred-height: 36px;
+    Rectangle {
+        background: #898989;
+        border-radius: 7px;
+    }
+    Rectangle {
+        background: #2B2B2B;
+        border-radius: 5px;
+        height: 34.875px;
+        width: 34.875px;
+        x: 0px;
+        y: 0px;
+    }
+    Image {
+        height: 11.25px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.ellipse-1;
+        width: 11.25px;
+        x: 12.375px;
+        y: 12.375px;
+    }
+    Rectangle {
+        height: 6.75px;
+        width: 2.25px;
+        x: 6.75px;
+        y: 14.625px;
+        Image {
+            height: 7.75px;
+            image-fit: fill;
+            source: Assets.icon;
+            width: 3.25px;
+            x: -0.5px;
+            y: -0.5px;
+        }
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-3;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 180deg;
+        width: 2.25px;
+        x: 29.25px;
+        y: 21.375px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-4;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 90deg;
+        width: 2.25px;
+        x: 21.375px;
+        y: 6.75px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-5;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -90deg;
+        width: 2.25px;
+        x: 14.625px;
+        y: 29.25px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-6;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 45deg;
+        width: 2.25px;
+        x: 12.432px;
+        y: 7.659px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-7;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -135deg;
+        width: 2.25px;
+        x: 23.568px;
+        y: 28.341px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-8;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 135deg;
+        width: 2.25px;
+        x: 28.341px;
+        y: 12.432px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-9;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -45deg;
+        width: 2.25px;
+        x: 7.659px;
+        y: 23.568px;
+    }
+}
+
+component Unnamed2Override inherits Rectangle {
+    preferred-width: 36px;
+    preferred-height: 36px;
+    Rectangle {
+        background: #898989;
+        border-radius: 7px;
+    }
+    Rectangle {
+        background: #2B2B2B;
+        border-radius: 5px;
+        height: 34.875px;
+        width: 34.875px;
+        x: 0px;
+        y: 0px;
+    }
+    Image {
+        height: 11.25px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.ellipse-1;
+        width: 11.25px;
+        x: 12.375px;
+        y: 12.375px;
+    }
+    Rectangle {
+        height: 6.75px;
+        width: 2.25px;
+        x: 6.75px;
+        y: 14.625px;
+        Image {
+            height: 7.75px;
+            image-fit: fill;
+            source: Assets.icon-2;
+            width: 3.25px;
+            x: -0.5px;
+            y: -0.5px;
+        }
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-3;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 180deg;
+        width: 2.25px;
+        x: 29.25px;
+        y: 21.375px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-4;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 90deg;
+        width: 2.25px;
+        x: 21.375px;
+        y: 6.75px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-5;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -90deg;
+        width: 2.25px;
+        x: 14.625px;
+        y: 29.25px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-6;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 45deg;
+        width: 2.25px;
+        x: 12.432px;
+        y: 7.659px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-7;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -135deg;
+        width: 2.25px;
+        x: 23.568px;
+        y: 28.341px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-8;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 135deg;
+        width: 2.25px;
+        x: 28.341px;
+        y: 12.432px;
+    }
+    Image {
+        height: 6.75px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.vector-9;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -45deg;
+        width: 2.25px;
+        x: 7.659px;
+        y: 23.568px;
+    }
+}
+
+export component Demo inherits Window {
+    width: 1280px;
+    height: 720px;
+    background: transparent;
+    Rectangle {
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
         background: #202020;
         clip: true;
         Rectangle {
             x: 25px;
+<<<<<<< HEAD
             y: parent.height - 122px;
             width: parent.width - 51px;
             height: 96px;
@@ -401,12 +689,106 @@ export component Demo inherits Window {
                             }
                         }
                     }
+=======
+            y: 598px;
+            width: 1229px;
+            height: 96px;
+            Rectangle {
+                x: 0px;
+                y: 0px;
+                width: 96px;
+                height: 96px;
+                background: #D9D9D9;
+                border-radius: 10px;
+            }
+            Rectangle {
+                x: 116px;
+                y: 11px;
+                width: 1106px;
+                height: 73px;
+                ShkalaVremeni {
+                    x: 0px;
+                    y: 0.25px;
+                    width: 1106px;
+                    height: 23px;
+                }
+                Rectangle {
+                    x: 0px;
+                    y: 28.25px;
+                    width: 1106px;
+                    height: 48.5px;
+                    Rectangle {
+                        x: 0px;
+                        y: 10.5px;
+                        width: 112px;
+                        height: 38px;
+                        FlexboxLayout {
+                            flex-wrap: no-wrap;
+                            spacing: 6px;
+                            cross-axis-alignment: center;
+                            Unnamed {
+                                width: 68px;
+                                height: 23px;
+                            }
+                            Image {
+                                width: 38px;
+                                height: 38px;
+                                source: @image-url("assets/image-a7524bd04a5d9478.png");
+                                image-fit: fill;
+                                image-rendering: pixelated;
+                            }
+                        }
+                    }
+                    Rectangle {
+                        x: 520px;
+                        y: 0px;
+                        width: 135px;
+                        height: 41px;
+                        Image {
+                            x: 0px;
+                            y: 5px;
+                            width: 31px;
+                            height: 31px;
+                            source: @image-url("assets/image-ad9b5a6d06da7dec.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 46px;
+                            y: 0px;
+                            width: 43px;
+                            height: 41px;
+                            source: @image-url("assets/image-9e45c6515b00fe78.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 104px;
+                            y: 5px;
+                            width: 31px;
+                            height: 31px;
+                            source: @image-url("assets/image-8c4553e8b0d341b7.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                    }
+                    Unnamed2Override {
+                        x: 1063px;
+                        y: 5px;
+                        width: 36px;
+                        height: 36px;
+                    }
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
                 }
             }
         }
         Rectangle {
             x: 25px;
+<<<<<<< HEAD
             y: parent.height - 172px;
+=======
+            y: 548px;
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -416,7 +798,11 @@ export component Demo inherits Window {
                 height: parent.height;
                 opacity: 0;
                 color: #C3C3C3;
+<<<<<<< HEAD
                 text: root.track_title;
+=======
+                text: "название трека";
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -431,7 +817,11 @@ export component Demo inherits Window {
                 x: (self.preferred-width - self.width) / 2;
                 y: (self.preferred-height - self.height) / 2;
                 color: #C3C3C3;
+<<<<<<< HEAD
                 text: root.track_title;
+=======
+                text: "название трека";
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -446,7 +836,11 @@ export component Demo inherits Window {
                 height: parent.height + 2px * ceil(max(0px, figma-overflow-1-measure.preferred-height - parent.height) / 2px + 0.091);
                 y: (figma-overflow-1-measure.preferred-height - self.height) / 2;
                 color: #C3C3C3;
+<<<<<<< HEAD
                 text: root.track_title;
+=======
+                text: "название трека";
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -458,11 +852,19 @@ export component Demo inherits Window {
         }
         Text {
             x: 25px;
+<<<<<<< HEAD
             y: parent.height - 146px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
             text: root.artist_name;
+=======
+            y: 574px;
+            width: 154px;
+            height: 16px;
+            color: #FFFFFF;
+            text: "исполнитель";
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
             font-family: "Inter";
             font-size: 15px;
             font-weight: 400;
@@ -470,11 +872,16 @@ export component Demo inherits Window {
             letter-spacing: 0.15px;
             wrap: word-wrap;
         }
+<<<<<<< HEAD
         Bibleoteka {
+=======
+        Rectangle {
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
             x: 17px;
             y: 12px;
             width: 36px;
             height: 36px;
+<<<<<<< HEAD
             clicked => { root.library_clicked(); }
         }
         Text {
@@ -489,6 +896,45 @@ export component Demo inherits Window {
             font-size: 11px;
             overflow: elide;
             max-lines: 1;
+=======
+            Rectangle {
+                x: 0px;
+                y: 1px;
+                width: 36px;
+                height: 36px;
+                background: #898989;
+                border-radius: 7px;
+            }
+            Rectangle {
+                x: 0px;
+                y: 0.563px;
+                width: 34.875px;
+                height: 34.875px;
+                background: #2B2B2B;
+                border-radius: 5px;
+            }
+            Rectangle {
+                x: 6px;
+                y: 9px;
+                width: 25px;
+                height: 3px;
+                background: #D9D9D9;
+            }
+            Rectangle {
+                x: 6px;
+                y: 17px;
+                width: 25px;
+                height: 3px;
+                background: #D9D9D9;
+            }
+            Rectangle {
+                x: 6px;
+                y: 25px;
+                width: 25px;
+                height: 3px;
+                background: #D9D9D9;
+            }
+>>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
         }
     }
 }
