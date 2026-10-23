@@ -348,7 +348,7 @@ export component Demo inherits Window {
                 x: (self.preferred-width - self.width) / 2;
                 y: (self.preferred-height - self.height) / 2;
                 color: #C3C3C3;
-                text: "название трека";
+                text: root.track_title;
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -363,7 +363,7 @@ export component Demo inherits Window {
                 height: parent.height + 2px * ceil(max(0px, figma-overflow-1-measure.preferred-height - parent.height) / 2px + 0.091);
                 y: (figma-overflow-1-measure.preferred-height - self.height) / 2;
                 color: #C3C3C3;
-                text: "название трека";
+                text: root.track_title;
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
