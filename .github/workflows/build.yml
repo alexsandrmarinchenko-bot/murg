@@ -2,7 +2,7 @@ name: Rust UI build
 
 on:
   push:
-    branches: ["main", "slint-figma-window-resize-20261023"]
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
