@@ -1,6 +1,6 @@
 use std::{
     cell::{Cell, RefCell},
-    path::{Path, PathBuf},
+    path::PathBuf,
     rc::Rc,
     time::Duration,
 };
@@ -223,7 +223,6 @@ pub fn run() -> Result<(), slint::PlatformError> {
         let weak = window_weak.clone();
         let state = Rc::clone(&snapshot);
         let seeking = Rc::clone(&seek_dragging);
-        let adjusting_volume = Rc::clone(&volume_dragging);
         window.on_seek_committed(move |seconds: f32| {
             let (track_id, duration) = {
                 let current = state.borrow();
@@ -248,12 +247,6 @@ pub fn run() -> Result<(), slint::PlatformError> {
                     set_status(&weak, format!("Ошибка перемотки: {error}"));
                 }
             }
-            if let (Some(window), Ok(())) = (weak.upgrade(), player::read_status()) {
-                // The timer will update metadata and the exact position on its
-                // next tick; this immediate refresh gives quick visual feedback.
-                window.set_status_message(SharedString::default());
-            }
-            let _ = (&state, &adjusting_volume);
         });
     }
 
