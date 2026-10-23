@@ -292,8 +292,8 @@ export component PlayerWindow inherits Window {
 
     preferred-width: 1280px;
     preferred-height: 720px;
-    min-width: 720px;
-    min-height: 520px;
+    min-width: 480px;
+    min-height: 300px;
     title: "Murglar Controller";
 
     Rectangle {
@@ -368,7 +368,8 @@ export component PlayerWindow inherits Window {
                 HorizontalLayout {
                     height: 96px;
                     spacing: 27px;
-                    alignment: start;
+                    // Let the controls column consume the remaining space after the fixed cover.
+                    alignment: stretch;
                     cross-axis-alignment: center;
 
                     Rectangle {
