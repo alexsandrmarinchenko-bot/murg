@@ -53,6 +53,9 @@ cargo check --locked
 │   ├── main.rs                  # Точка входа
 │   ├── ui.rs                    # Связь Slint-интерфейса с плеером
 │   └── player.rs                # MPRIS-команды и чтение метаданных
+├── docs/
+│   ├── figma-export.md          # Как обновлять интерфейс из Figma
+│   └── figma-exports/           # Архивные экспорты, не участвуют в сборке
 ├── build.rs                     # Компиляция Slint
 ├── Cargo.toml
 └── Cargo.lock

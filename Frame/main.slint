@@ -261,8 +261,8 @@ export component Demo inherits Window {
         background: #202020;
         Rectangle {
             x: 25px;
-            y: 598px;
-            width: 1229px;
+            y: parent.height - 122px;
+            width: parent.width - 51px;
             height: 96px;
             Rectangle {
                 x: 0px;
@@ -282,12 +282,12 @@ export component Demo inherits Window {
             Rectangle {
                 x: 116px;
                 y: 11px;
-                width: 1106px;
+                width: parent.width - 123px;
                 height: 73px;
                 ShkalaVremeni {
                     x: 0px;
                     y: 0.25px;
-                    width: 1106px;
+                    width: parent.width;
                     height: 23px;
                     position_seconds <=> root.position_seconds;
                     duration_seconds: root.duration_seconds;
@@ -298,7 +298,7 @@ export component Demo inherits Window {
                 Rectangle {
                     x: 0px;
                     y: 28.25px;
-                    width: 1106px;
+                    width: parent.width;
                     height: 48.5px;
                     Rectangle {
                         x: 0px;
@@ -327,7 +327,7 @@ export component Demo inherits Window {
                         }
                     }
                     Rectangle {
-                        x: 520px;
+                        x: (parent.width - self.width) / 2 + 34px;
                         y: 0px;
                         width: 135px;
                         height: 41px;
@@ -354,7 +354,7 @@ export component Demo inherits Window {
                         }
                     }
                     Rectangle {
-                        x: 1063px;
+                        x: parent.width - self.width - 7px;
                         y: 5px;
                         width: 36px;
                         height: 36px;
@@ -486,7 +486,7 @@ export component Demo inherits Window {
         }
         Rectangle {
             x: 25px;
-            y: 548px;
+            y: parent.height - 172px;
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -538,7 +538,7 @@ export component Demo inherits Window {
         }
         Text {
             x: 25px;
-            y: 574px;
+            y: parent.height - 146px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
