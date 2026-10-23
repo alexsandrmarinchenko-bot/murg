@@ -138,6 +138,13 @@ pub fn run() -> Result<(), slint::PlatformError> {
 
     {
         let weak = window_weak.clone();
+        window.on_settings_clicked(move || {
+            set_status(&weak, "Настройки пока не подключены.");
+        });
+    }
+
+    {
+        let weak = window_weak.clone();
         let state = Rc::clone(&snapshot);
         let seeking = Rc::clone(&seek_dragging);
         let adjusting_volume = Rc::clone(&volume_dragging);
