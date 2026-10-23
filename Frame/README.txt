@@ -3,4 +3,6 @@ Font imports are commented out so you can run the export without the font files.
 Text remains native; images are stored in assets/.
 
 UNSUPPORTED_EFFECT_IGNORED: Unsupported effects were ignored
+STROKES_IN_LAYOUT_APPROXIMATED: Strokes included in layout are approximated using the uninflated geometry
+BASELINE_ALIGNMENT_APPROXIMATED: Baseline alignment uses captured child positions because Slint does not support baseline layout
 FONT_VARIATIONS_APPROXIMATED: Slint cannot express font axes slnt=0; use a static font instance or outlined SVG
