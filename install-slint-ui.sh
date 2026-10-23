@@ -22,7 +22,14 @@ die() {
 [[ -d "$PROJECT_DIR" ]] || die "Не найден проект: $PROJECT_DIR"
 [[ -f "$PROJECT_DIR/Cargo.toml" ]] || die "Не найден Cargo.toml"
 [[ -f "$TARGET_FILE" ]] || die "Не найден src/ui.rs"
-[[ -f "$PROJECT_DIR/Frame/main.slint" ]] || die "Не найден Frame/main.slint. Убедись, что последний Figma-экспорт уже синхронизирован."
+if [[ -f "$PROJECT_DIR/Frame/main.slint" ]]; then
+    ASSET_DIR="$PROJECT_DIR/Frame/assets"
+elif [[ -f "$PROJECT_DIR/Frame-1/main.slint" ]]; then
+    ASSET_DIR="$PROJECT_DIR/Frame-1/assets"
+else
+    die "Не найден Frame/main.slint или Frame-1/main.slint. Сначала синхронизируй Figma-экспорт."
+fi
+
 for asset in \
     image-d81a3bd1d543f942.png \
     image-99c1e7fe16e3ea5d.png \
@@ -32,7 +39,7 @@ for asset in \
     image-8c4553e8b0d341b7.png \
     image-cfb10b8456555fd5.png
 do
-    [[ -s "$PROJECT_DIR/Frame/assets/$asset" ]] || die "Не найден ресурс Frame/assets/$asset"
+    [[ -s "$ASSET_DIR/$asset" ]] || die "Не найден ресурс $ASSET_DIR/$asset"
 done
 command -v curl >/dev/null 2>&1 || die "Установи curl."
 command -v cargo >/dev/null 2>&1 || die "Не найден cargo."
