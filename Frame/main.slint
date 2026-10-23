@@ -156,11 +156,12 @@ export component SettingsButton inherits Rectangle {
         background: area.pressed ? #FFFFFF : #D9D9D9;
         animate background { duration: 150ms; easing: ease-in-out; }
     }
-    Ellipse {
+    Rectangle {
         x: 12px;
         y: 12px;
         width: 12px;
         height: 12px;
+        border-radius: 6px;
         background: #2B2B2B;
         border-width: 2px;
         border-color: area.pressed ? #FFFFFF : #D9D9D9;
