@@ -403,15 +403,16 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     window.set_size_request(720, 520);
     window.add_css_class("figma-main");
 
-    // Vertical layout grows with the window. The spacer expands, pinning the
-    // player dock to the bottom instead of freezing all widgets at 1200x800.
+    // Match the fixed 1280x720 Figma artboard. A bottom-expanding spacer
+    // shifts the player dock upward whenever the compositor gives the window
+    // less than 720px of content height, so the dock is positioned from the top.
     let root = gtk::Box::new(gtk::Orientation::Vertical, 0);
     root.set_hexpand(true);
     root.set_vexpand(true);
     root.add_css_class("design-canvas");
     window.set_child(Some(&root));
 
-    // Header: keep the library control near the upper-left corner.
+    // Header: at x=25, y=28 in the exported Figma artboard.
     let header = gtk::Box::new(gtk::Orientation::Horizontal, 0);
     header.set_margin_top(28);
     header.set_margin_start(25);
@@ -440,9 +441,13 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     header.append(&library);
     root.append(&header);
 
+    // Header occupies 59px (28px top margin + 31px icon). Leave a fixed
+    // 489px gap so the dock begins at y=548px, exactly as in Figma.
+    // Do not let this gap expand: the design uses absolute 1280x720 coordinates.
     let spacer = gtk::Box::new(gtk::Orientation::Vertical, 0);
     spacer.set_hexpand(true);
-    spacer.set_vexpand(true);
+    spacer.set_size_request(1, 489);
+    spacer.set_vexpand(false);
     root.append(&spacer);
 
     // The dock keeps its Figma-like vertical rhythm, but its width is derived
