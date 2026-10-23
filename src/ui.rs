@@ -161,7 +161,21 @@ scale.figma-seek slider:hover {
     background-color: #d9d9d9;
 }
 
-scale.figma-volume trough,
+scale.figma-volume {
+    min-height: 22px;
+    padding: 0;
+    margin: 0;
+}
+
+scale.figma-volume trough {
+    min-height: 5px;
+    background-color: #646464;
+    background-image: none;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
 scale.figma-volume highlight {
     min-height: 5px;
     background-color: #d9d9d9;
@@ -172,13 +186,17 @@ scale.figma-volume highlight {
 }
 
 scale.figma-volume slider {
-    min-width: 23px;
-    min-height: 22px;
-    background-color: #d9d9d9;
+    min-width: 13px;
+    min-height: 13px;
+    background-color: #f5f5f5;
     background-image: none;
-    border: none;
-    border-radius: 4px;
+    border: 1px solid #646464;
+    border-radius: 3px;
     box-shadow: none;
+}
+
+scale.figma-volume slider:hover {
+    background-color: #ffffff;
 }
 
 label.figma-status {
@@ -232,7 +250,26 @@ struct UiWidgets {
 }
 
 fn project_path(relative: &str) -> PathBuf {
-    Path::new(env!("CARGO_MANIFEST_DIR")).join(relative)
+    let root = Path::new(env!("CARGO_MANIFEST_DIR"));
+    let requested = root.join(relative);
+    if requested.is_file() {
+        return requested;
+    }
+
+    // The exported Figma folder was renamed from Frame-1 to Frame.
+    // Accept either name so the UI still finds its button images in older
+    // local checkouts and does not silently render empty buttons.
+    let alternate = if let Some(rest) = relative.strip_prefix("Frame/") {
+        Some(root.join("Frame-1").join(rest))
+    } else if let Some(rest) = relative.strip_prefix("Frame-1/") {
+        Some(root.join("Frame").join(rest))
+    } else {
+        None
+    };
+
+    alternate
+        .filter(|path| path.is_file())
+        .unwrap_or(requested)
 }
 
 fn picture_from_project_file(relative: &str, width: i32, height: i32) -> gtk::Picture {
