@@ -361,19 +361,21 @@ export component Demo inherits Window {
                         width: 36px;
                         height: 36px;
                         clip: true;
-                        Rectangle {                background: settings_area.pressed ? #2B2B2B : #898989;
-                border-radius: settings_area.pressed ? 5px : 7px;
-                animate background, border-radius { duration: 150ms; easing: ease-in-out; }
+                        Rectangle {
+                            background: settings_area.pressed ? #2B2B2B : #898989;
+                            border-radius: settings_area.pressed ? 5px : 7px;
+                            animate background, border-radius { duration: 150ms; easing: ease-in-out; }
                         }
                         Rectangle {
                             x: 0px;
                             y: 0px;
                             width: 34.875px;
-                            height: 34.875px;                background: #2B2B2B;
-                border-width: settings_area.has-hover && !settings_area.pressed ? 1px : 0px;
-                border-color: #FFFFFF;
-                animate border-width { duration: 150ms; easing: ease-in-out; }
-                border-radius: 5px;
+                            height: 34.875px;
+                            background: #2B2B2B;
+                            border-width: settings_area.has-hover && !settings_area.pressed ? 1px : 0px;
+                            border-color: #FFFFFF;
+                            animate border-width { duration: 150ms; easing: ease-in-out; }
+                            border-radius: 5px;
                         }
                         Image {
                             x: 12.375px;
@@ -559,19 +561,21 @@ export component Demo inherits Window {
                 x: 0px;
                 y: 1px;
                 width: 36px;
-                height: 36px;                background: library_area.pressed ? #2B2B2B : #898989;
-                border-radius: library_area.pressed ? 5px : 7px;
-                animate background, border-radius { duration: 150ms; easing: ease-in-out; }
+                height: 36px;
+                            background: library_area.pressed ? #2B2B2B : #898989;
+                            border-radius: library_area.pressed ? 5px : 7px;
+                            animate background, border-radius { duration: 150ms; easing: ease-in-out; }
             }
             Rectangle {
                 x: 0px;
                 y: 0.563px;
                 width: 34.875px;
-                height: 34.875px;                background: #2B2B2B;
-                border-width: library_area.has-hover && !library_area.pressed ? 1px : 0px;
-                border-color: #FFFFFF;
-                animate border-width { duration: 150ms; easing: ease-in-out; }
-                border-radius: 5px;
+                height: 34.875px;
+                            background: #2B2B2B;
+                            border-width: library_area.has-hover && !library_area.pressed ? 1px : 0px;
+                            border-color: #FFFFFF;
+                            animate border-width { duration: 150ms; easing: ease-in-out; }
+                            border-radius: 5px;
             }
             Rectangle {
                 x: 6px;
@@ -594,12 +598,12 @@ export component Demo inherits Window {
                 height: 3px;
                 background: #D9D9D9;
             }
-                    library_area := TouchArea {
+            library_area := TouchArea {
                 width: parent.width;
                 height: parent.height;
                 clicked => { root.library_clicked(); }
             }
-}
+        }
         Text {
             x: 25px;
             y: 64px;
