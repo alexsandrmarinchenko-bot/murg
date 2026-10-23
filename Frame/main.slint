@@ -3,6 +3,7 @@
 global Assets {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     out property <image> settings_gear: @image-url("assets/settings-gear.svg");
     out property <image> settings_gear_pressed: @image-url("assets/settings-gear-pressed.svg");
 =======
@@ -159,11 +160,22 @@ export component Unnamed inherits Rectangle {
 =======
 export component Unnamed inherits Rectangle {
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+    out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
+    out property <image> unnamed-2: @image-url("assets/image-a71d83b2d743a058.png");
+    out property <image> polygon-2: @image-url("assets/image-d149f636284e1f21.png");
+    out property <image> polygon-1: @image-url("assets/image-2ac634e6766b6d9e.png");
+    out property <image> polygon-3: @image-url("assets/image-f8ce3a9d20674783.png");
+}
+
+export component Unnamed inherits Rectangle {
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     preferred-width: 68px;
     preferred-height: 23px;
     Image {
         height: 5px;
         image-fit: fill;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -172,6 +184,9 @@ export component Unnamed inherits Rectangle {
 =======
         image-rendering: pixelated;
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+        image-rendering: pixelated;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         source: Assets.unnamed;
         width: 68px;
         x: 0px;
@@ -180,6 +195,7 @@ export component Unnamed inherits Rectangle {
     Image {
         height: 23px;
         image-fit: fill;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         source: Assets.unnamed-2;
@@ -222,6 +238,8 @@ export component ShkalaVremeni inherits Rectangle {
 =======
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         image-rendering: pixelated;
         source: Assets.unnamed-2;
         width: 23px;
@@ -232,14 +250,18 @@ export component ShkalaVremeni inherits Rectangle {
 
 export component ShkalaVremeni inherits Rectangle {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     preferred-width: 1106px;
     preferred-height: 23px;
     Rectangle {
         background: #D9D9D9;
         height: 5px;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         width: parent.width;
@@ -249,6 +271,9 @@ export component ShkalaVremeni inherits Rectangle {
 =======
         width: 1106px;
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+        width: 1106px;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         x: 0px;
         y: 9px;
     }
@@ -257,6 +282,7 @@ export component ShkalaVremeni inherits Rectangle {
         border-radius: 4px;
         height: 23px;
         width: 23px;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         x: 3px + max(0px, root.width - self.width - 3px) *
@@ -324,15 +350,53 @@ export component Demo inherits Window {
 =======
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         x: 3px;
         y: 0px;
     }
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export enum Unnamed2Property1 { default }
 export component Unnamed2 inherits Rectangle {
     in property <Unnamed2Property1> variant-property-1: Unnamed2Property1.default;
+=======
+export enum NextProperty1 { default }
+export component Next inherits Rectangle {
+    in property <NextProperty1> variant-property-1: NextProperty1.default;
+    preferred-width: 25px;
+    preferred-height: 26px;
+    Rectangle {
+        background: #898989;
+        border-radius: 7px;
+    }
+    Rectangle {
+        background: #2B2B2B;
+        border-radius: 5px;
+        height: 25px;
+        width: 24px;
+        x: 0px;
+        y: 0px;
+    }
+    Image {
+        height: 14.25px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.polygon-2;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 90deg;
+        width: 16.454px;
+        x: 20.25px;
+        y: 5px;
+    }
+}
+
+export enum PauseProperty1 { default }
+export component Pause inherits Rectangle {
+    in property <PauseProperty1> variant-property-1: PauseProperty1.default;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     preferred-width: 36px;
     preferred-height: 36px;
     Rectangle {
@@ -348,6 +412,7 @@ export component Unnamed2 inherits Rectangle {
         y: 0px;
     }
     Image {
+<<<<<<< HEAD
         height: 11.25px;
         image-fit: fill;
         image-rendering: pixelated;
@@ -452,6 +517,25 @@ export component Unnamed2 inherits Rectangle {
 component Unnamed2Override inherits Rectangle {
     preferred-width: 36px;
     preferred-height: 36px;
+=======
+        height: 24px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.polygon-1;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: 90deg;
+        width: 24px;
+        x: 29px;
+        y: 6px;
+    }
+}
+
+export enum BackProperty1 { default }
+export component Back inherits Rectangle {
+    in property <BackProperty1> variant-property-1: BackProperty1.default;
+    preferred-width: 26px;
+    preferred-height: 26px;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
     Rectangle {
         background: #898989;
         border-radius: 7px;
@@ -459,12 +543,18 @@ component Unnamed2Override inherits Rectangle {
     Rectangle {
         background: #2B2B2B;
         border-radius: 5px;
+<<<<<<< HEAD
         height: 34.875px;
         width: 34.875px;
+=======
+        height: 25px;
+        width: 25px;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         x: 0px;
         y: 0px;
     }
     Image {
+<<<<<<< HEAD
         height: 11.25px;
         image-fit: fill;
         image-rendering: pixelated;
@@ -568,11 +658,26 @@ component Unnamed2Override inherits Rectangle {
 
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+        height: 19px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.polygon-3;
+        transform-origin: { x: 0px, y: 0px };
+        transform-rotation: -90deg;
+        width: 19px;
+        x: 3px;
+        y: 22px;
+    }
+}
+
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
 export component Demo inherits Window {
     width: 1280px;
     height: 720px;
     background: transparent;
     Rectangle {
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
         background: #202020;
@@ -723,6 +828,11 @@ export component Demo inherits Window {
         Rectangle {
             x: 25px;
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+        background: #202020;
+        Rectangle {
+            x: 25px;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             y: 598px;
             width: 1229px;
             height: 96px;
@@ -777,6 +887,7 @@ export component Demo inherits Window {
                         y: 0px;
                         width: 135px;
                         height: 41px;
+<<<<<<< HEAD
                         Image {
                             x: 0px;
                             y: 5px;
@@ -810,14 +921,39 @@ export component Demo inherits Window {
 =======
                     Rectangle {
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+                        Pause {
+                            x: 50px;
+                            y: 2.75px;
+                            width: 36px;
+                            height: 36px;
+                        }
+                        Next {
+                            x: 94px;
+                            y: 12.75px;
+                            width: 25px;
+                            height: 26px;
+                        }
+                        Back {
+                            x: 16px;
+                            y: 12.75px;
+                            width: 26px;
+                            height: 26px;
+                        }
+                    }
+                    Rectangle {
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                         x: 1063px;
                         y: 5px;
                         width: 36px;
                         height: 36px;
 <<<<<<< HEAD
+<<<<<<< HEAD
                     }
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
 =======
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                         clip: true;
                         Rectangle {
                             background: #898989;
@@ -932,12 +1068,16 @@ export component Demo inherits Window {
                             image-rendering: pixelated;
                         }
                     }
+<<<<<<< HEAD
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 }
             }
         }
         Rectangle {
             x: 25px;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             y: parent.height - 172px;
@@ -947,6 +1087,9 @@ export component Demo inherits Window {
 =======
             y: 548px;
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+            y: 548px;
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -958,6 +1101,7 @@ export component Demo inherits Window {
                 color: #C3C3C3;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 text: root.track_title;
 =======
                 text: "название трека";
@@ -965,6 +1109,9 @@ export component Demo inherits Window {
 =======
                 text: "название трека";
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+                text: "название трека";
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -981,6 +1128,7 @@ export component Demo inherits Window {
                 color: #C3C3C3;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 text: root.track_title;
 =======
                 text: "название трека";
@@ -988,6 +1136,9 @@ export component Demo inherits Window {
 =======
                 text: "название трека";
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+                text: "название трека";
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -1004,6 +1155,7 @@ export component Demo inherits Window {
                 color: #C3C3C3;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 text: root.track_title;
 =======
                 text: "название трека";
@@ -1011,6 +1163,9 @@ export component Demo inherits Window {
 =======
                 text: "название трека";
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+                text: "название трека";
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -1024,6 +1179,7 @@ export component Demo inherits Window {
             x: 25px;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             y: parent.height - 146px;
             width: 154px;
             height: 16px;
@@ -1032,15 +1188,20 @@ export component Demo inherits Window {
 =======
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             y: 574px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
             text: "исполнитель";
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             font-family: "Inter";
             font-size: 15px;
             font-weight: 400;
@@ -1050,6 +1211,7 @@ export component Demo inherits Window {
         }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         Bibleoteka {
 =======
         Rectangle {
@@ -1057,10 +1219,14 @@ export component Demo inherits Window {
 =======
         Rectangle {
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+        Rectangle {
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             x: 17px;
             y: 12px;
             width: 36px;
             height: 36px;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             clicked => { root.library_clicked(); }
@@ -1080,6 +1246,8 @@ export component Demo inherits Window {
 =======
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
             Rectangle {
                 x: 0px;
                 y: 1px;
@@ -1118,9 +1286,12 @@ export component Demo inherits Window {
                 background: #D9D9D9;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
 =======
 >>>>>>> 252999d (23 окт. 2026 г., 21:42)
+=======
+>>>>>>> d09d66d (23 окт. 2026 г., 22:42)
         }
     }
 }
