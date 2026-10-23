@@ -1,0 +1,588 @@
+// Runtime UI based on the current Figma export in Frame/main.slint.
+// Keep the raw export untouched so future exports do not erase player logic.
+
+global Assets {
+    out property <image> library_base: @image-url("../Frame/assets/image-d81a3bd1d543f942.png");
+    out property <image> library_icon: @image-url("../Frame/assets/image-99c1e7fe16e3ea5d.png");
+    out property <image> volume_track: @image-url("../Frame/assets/image-49194f4ab8df0950.png");
+    out property <image> volume_thumb: @image-url("../Frame/assets/image-a71d83b2d743a058.png");
+    out property <image> volume_icon: @image-url("../Frame/assets/image-a7524bd04a5d9478.png");
+    out property <image> previous_icon: @image-url("../Frame/assets/image-ad9b5a6d06da7dec.png");
+    out property <image> play_icon: @image-url("../Frame/assets/image-9e45c6515b00fe78.png");
+    out property <image> next_icon: @image-url("../Frame/assets/image-8c4553e8b0d341b7.png");
+}
+
+export component LibraryControl inherits Rectangle {
+    callback clicked();
+    preferred-width: 31px;
+    preferred-height: 31px;
+    background: transparent;
+
+    Image {
+        x: 0px;
+        y: 0px;
+        width: 31px;
+        height: 31px;
+        source: Assets.library_base;
+        image-fit: fill;
+    }
+    Rectangle {
+        x: 5px;
+        y: 7px;
+        width: 20px;
+        height: 17px;
+        background: transparent;
+        Image {
+            x: -0.53px;
+            y: -0.701px;
+            width: 21.648px;
+            height: 18.401px;
+            source: Assets.library_icon;
+            image-fit: fill;
+        }
+    }
+    TouchArea {
+        width: 31px;
+        height: 31px;
+        clicked => { root.clicked(); }
+    }
+}
+
+export component SeekControl inherits Rectangle {
+    in-out property <float> position_seconds: 0;
+    in property <float> duration_seconds: 1;
+    callback drag_started();
+    callback drag_cancelled();
+    callback committed(float);
+
+    preferred-height: 23px;
+    background: transparent;
+
+    Rectangle {
+        x: 0px;
+        y: 9px;
+        width: root.width;
+        height: 5px;
+        background: #D9D9D9;
+    }
+    Rectangle {
+        x: 3px + (root.width - self.width - 3px) * (root.position_seconds / max(root.duration_seconds, 1));
+        y: 0px;
+        width: 23px;
+        height: 23px;
+        background: #D9D9D9;
+        border-radius: 4px;
+    }
+    area := TouchArea {
+        width: root.width;
+        height: root.height;
+
+        moved => {
+            if (self.pressed) {
+                root.position_seconds = max(0, min(root.duration_seconds,
+                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * root.duration_seconds));
+            }
+        }
+        pointer-event(event) => {
+            if (event.kind == PointerEventKind.down) {
+                root.drag_started();
+            }
+            if (event.kind == PointerEventKind.up) {
+                root.position_seconds = max(0, min(root.duration_seconds,
+                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * root.duration_seconds));
+                root.committed(root.position_seconds);
+            }
+            if (event.kind == PointerEventKind.cancel) {
+                root.drag_cancelled();
+            }
+        }
+    }
+}
+
+export component VolumeControl inherits Rectangle {
+    in-out property <float> value: 8;
+    callback drag_started();
+    callback drag_finished();
+    callback changed(float);
+
+    preferred-width: 112px;
+    preferred-height: 48.5px;
+    background: transparent;
+
+    Image {
+        x: 0px;
+        y: 27px;
+        width: 68px;
+        height: 5px;
+        source: Assets.volume_track;
+        image-fit: fill;
+    }
+    Image {
+        x: 3px + root.value * 0.42px;
+        y: 18px;
+        width: 23px;
+        height: 23px;
+        source: Assets.volume_thumb;
+        image-fit: fill;
+    }
+    Image {
+        x: 74px;
+        y: 10.5px;
+        width: 38px;
+        height: 38px;
+        source: Assets.volume_icon;
+        image-fit: fill;
+    }
+    area := TouchArea {
+        x: 0px;
+        y: 10.5px;
+        width: 68px;
+        height: 38px;
+
+        moved => {
+            if (self.pressed) {
+                root.value = max(0, min(100, self.mouse-x / self.width * 100));
+            }
+        }
+        pointer-event(event) => {
+            if (event.kind == PointerEventKind.down) {
+                root.drag_started();
+            }
+            if (event.kind == PointerEventKind.up) {
+                root.value = max(0, min(100, self.mouse-x / self.width * 100));
+                root.changed(root.value);
+                root.drag_finished();
+            }
+            if (event.kind == PointerEventKind.cancel) {
+                root.drag_finished();
+            }
+        }
+    }
+}
+
+export component TransportControl inherits Rectangle {
+    in property <bool> is_playing: false;
+    callback previous_clicked();
+    callback play_clicked();
+    callback next_clicked();
+
+    preferred-width: 135px;
+    preferred-height: 48.5px;
+    background: transparent;
+
+    Image {
+        x: 0px;
+        y: 5px;
+        width: 31px;
+        height: 31px;
+        source: Assets.previous_icon;
+        image-fit: fill;
+    }
+    TouchArea {
+        x: 0px;
+        y: 0px;
+        width: 31px;
+        height: 41px;
+        clicked => { root.previous_clicked(); }
+    }
+
+    Image {
+        x: 46px;
+        y: 0px;
+        width: 43px;
+        height: 41px;
+        source: Assets.play_icon;
+        image-fit: fill;
+    }
+    Rectangle {
+        visible: root.is_playing;
+        x: 59px;
+        y: 8px;
+        width: 18px;
+        height: 23px;
+        background: #3C3B3B;
+    }
+    Rectangle {
+        visible: root.is_playing;
+        x: 62px;
+        y: 13px;
+        width: 4px;
+        height: 15px;
+        background: #000000;
+    }
+    Rectangle {
+        visible: root.is_playing;
+        x: 70px;
+        y: 13px;
+        width: 4px;
+        height: 15px;
+        background: #000000;
+    }
+    TouchArea {
+        x: 46px;
+        y: 0px;
+        width: 43px;
+        height: 41px;
+        clicked => { root.play_clicked(); }
+    }
+
+    Image {
+        x: 104px;
+        y: 5px;
+        width: 31px;
+        height: 31px;
+        source: Assets.next_icon;
+        image-fit: fill;
+    }
+    TouchArea {
+        x: 104px;
+        y: 0px;
+        width: 31px;
+        height: 41px;
+        clicked => { root.next_clicked(); }
+    }
+}
+
+export component SettingsControl inherits Rectangle {
+    callback clicked();
+    preferred-width: 31px;
+    preferred-height: 48.5px;
+    background: transparent;
+
+    Image {
+        x: 0px;
+        y: 10px;
+        width: 31px;
+        height: 31px;
+        source: Assets.library_base;
+        image-fit: fill;
+    }
+    TouchArea {
+        x: 0px;
+        y: 10px;
+        width: 31px;
+        height: 31px;
+        clicked => { root.clicked(); }
+    }
+}
+
+export component PlayerWindow inherits Window {
+    in-out property <string> track_title: "название трека";
+    in-out property <string> artist_name: "исполнитель";
+    in-out property <float> position_seconds: 0;
+    in-out property <float> duration_seconds: 1;
+    in-out property <float> volume_percent: 8;
+    in-out property <bool> is_playing: false;
+    in-out property <image> cover_art;
+    in-out property <string> status_message: "";
+    in-out property <string> active_theme: "glass";
+    in-out property <bool> settings_open: false;
+
+    callback library_clicked();
+    callback previous_clicked();
+    callback play_clicked();
+    callback next_clicked();
+    callback seek_drag_started();
+    callback seek_drag_cancelled();
+    callback seek_committed(float);
+    callback volume_drag_started();
+    callback volume_drag_finished();
+    callback volume_changed(float);
+    callback theme_changed(string);
+
+    width: 1280px;
+    height: 720px;
+    min-width: 720px;
+    min-height: 520px;
+    title: "Murglar Controller";
+
+    Rectangle {
+        width: parent.width;
+        height: parent.height;
+        clip: true;
+        background: root.active_theme == "forest" ? #17251C
+            : root.active_theme == "cyberpunk" ? #180D21
+            : root.active_theme == "midnight" ? #121821
+            : root.active_theme == "amber" ? #251B0D
+            : root.active_theme == "matte" ? #292929
+            : #202020;
+
+        VerticalLayout {
+            width: parent.width;
+            height: parent.height;
+            padding-left: 25px;
+            padding-right: 26px;
+            padding-top: 28px;
+            padding-bottom: 26px;
+            alignment: space-between;
+            cross-axis-alignment: stretch;
+
+            LibraryControl {
+                height: 31px;
+                clicked => { root.library_clicked(); }
+            }
+
+            VerticalLayout {
+                height: 146px;
+                spacing: 0px;
+                alignment: start;
+                cross-axis-alignment: stretch;
+
+                Text {
+                    width: 162px;
+                    height: 23px;
+                    text: root.track_title;
+                    color: #C3C3C3;
+                    font-family: "Inter";
+                    font-size: 20px;
+                    font-weight: 400;
+                    letter-spacing: 0.2px;
+                    horizontal-alignment: left;
+                    vertical-alignment: center;
+                    overflow: elide;
+                    max-lines: 1;
+                    cross-axis-self-alignment: start;
+                }
+                Rectangle {
+                    height: 3px;
+                    background: transparent;
+                }
+                Text {
+                    width: 154px;
+                    height: 16px;
+                    text: root.artist_name;
+                    color: #FFFFFF;
+                    font-family: "Inter";
+                    font-size: 15px;
+                    font-weight: 400;
+                    letter-spacing: 0.15px;
+                    horizontal-alignment: left;
+                    vertical-alignment: center;
+                    overflow: elide;
+                    max-lines: 1;
+                    cross-axis-self-alignment: start;
+                }
+                Rectangle {
+                    height: 8px;
+                    background: transparent;
+                }
+
+                HorizontalLayout {
+                    height: 96px;
+                    spacing: 27px;
+                    alignment: start;
+                    cross-axis-alignment: center;
+
+                    Rectangle {
+                        width: 96px;
+                        height: 96px;
+                        background: #D9D9D9;
+                        border-radius: 10px;
+                        clip: true;
+                        Image {
+                            width: parent.width;
+                            height: parent.height;
+                            source: root.cover_art;
+                            image-fit: cover;
+                        }
+                    }
+
+                    VerticalLayout {
+                        horizontal-stretch: 1;
+                        height: 96px;
+                        spacing: 1px;
+                        alignment: start;
+                        cross-axis-alignment: stretch;
+
+                        SeekControl {
+                            width: parent.width;
+                            height: 23px;
+                            position_seconds <=> root.position_seconds;
+                            duration_seconds: root.duration_seconds;
+                            drag_started => { root.seek_drag_started(); }
+                            drag_cancelled => { root.seek_drag_cancelled(); }
+                            committed(value) => { root.seek_committed(value); }
+                        }
+
+                        HorizontalLayout {
+                            width: parent.width;
+                            height: 48.5px;
+                            spacing: 0px;
+                            alignment: space-between;
+                            cross-axis-alignment: stretch;
+
+                            VolumeControl {
+                                value <=> root.volume_percent;
+                                drag_started => { root.volume_drag_started(); }
+                                drag_finished => { root.volume_drag_finished(); }
+                                changed(value) => { root.volume_changed(value); }
+                            }
+
+                            TransportControl {
+                                is_playing: root.is_playing;
+                                previous_clicked => { root.previous_clicked(); }
+                                play_clicked => { root.play_clicked(); }
+                                next_clicked => { root.next_clicked(); }
+                            }
+
+                            SettingsControl {
+                                clicked => { root.settings_open = true; }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        Text {
+            x: 25px;
+            y: 64px;
+            width: min(parent.width - 50px, 900px);
+            height: 20px;
+            visible: root.status_message != "";
+            text: root.status_message;
+            color: #C3C3C3;
+            font-family: "Inter";
+            font-size: 11px;
+            overflow: elide;
+            max-lines: 1;
+        }
+    }
+
+    Rectangle {
+        visible: root.settings_open;
+        x: 0px;
+        y: 0px;
+        width: parent.width;
+        height: parent.height;
+        background: #111111;
+        TouchArea {
+            width: parent.width;
+            height: parent.height;
+            clicked => { root.settings_open = false; }
+        }
+    }
+
+    Rectangle {
+        visible: root.settings_open;
+        x: max(16px, (parent.width - 430px) / 2);
+        y: max(16px, (parent.height - 290px) / 2);
+        width: 430px;
+        height: 290px;
+        background: #282828;
+        border-color: #505050;
+        border-width: 1px;
+        border-radius: 10px;
+
+        Text {
+            x: 20px;
+            y: 17px;
+            width: 340px;
+            height: 28px;
+            text: "Настройки";
+            color: #F2F2F2;
+            font-family: "Inter";
+            font-size: 20px;
+            font-weight: 600;
+        }
+        Text {
+            x: 20px;
+            y: 48px;
+            width: 380px;
+            height: 18px;
+            text: "Цветовая тема";
+            color: #C3C3C3;
+            font-family: "Inter";
+            font-size: 12px;
+        }
+        Text {
+            x: 386px;
+            y: 12px;
+            width: 28px;
+            height: 28px;
+            text: "×";
+            color: #C3C3C3;
+            font-size: 22px;
+            horizontal-alignment: center;
+            vertical-alignment: center;
+        }
+        TouchArea {
+            x: 382px;
+            y: 10px;
+            width: 32px;
+            height: 32px;
+            clicked => { root.settings_open = false; }
+        }
+
+        HorizontalLayout {
+            x: 20px;
+            y: 78px;
+            width: 390px;
+            height: 190px;
+            spacing: 12px;
+            alignment: start;
+            cross-axis-alignment: stretch;
+
+            VerticalLayout {
+                width: 189px;
+                spacing: 8px;
+                for theme in ["glass", "matte", "cyberpunk"] : Rectangle {
+                    width: 189px;
+                    height: 48px;
+                    background: theme == root.active_theme ? #454545 : #202020;
+                    border-color: #555555;
+                    border-width: 1px;
+                    border-radius: 6px;
+                    Text {
+                        width: parent.width;
+                        height: parent.height;
+                        text: theme == "matte" ? "Matte Graphite" : theme == "cyberpunk" ? "Cyberpunk" : "Glass";
+                        color: #E8E8E8;
+                        font-size: 13px;
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                    }
+                    TouchArea {
+                        width: parent.width;
+                        height: parent.height;
+                        clicked => {
+                            root.active_theme = theme;
+                            root.theme_changed(theme);
+                            root.settings_open = false;
+                        }
+                    }
+                }
+            }
+            VerticalLayout {
+                width: 189px;
+                spacing: 8px;
+                for theme in ["midnight", "forest", "amber"] : Rectangle {
+                    width: 189px;
+                    height: 48px;
+                    background: theme == root.active_theme ? #454545 : #202020;
+                    border-color: #555555;
+                    border-width: 1px;
+                    border-radius: 6px;
+                    Text {
+                        width: parent.width;
+                        height: parent.height;
+                        text: theme == "midnight" ? "Midnight" : theme == "forest" ? "Forest" : "Amber";
+                        color: #E8E8E8;
+                        font-size: 13px;
+                        horizontal-alignment: center;
+                        vertical-alignment: center;
+                    }
+                    TouchArea {
+                        width: parent.width;
+                        height: parent.height;
+                        clicked => {
+                            root.active_theme = theme;
+                            root.theme_changed(theme);
+                            root.settings_open = false;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
