@@ -1,45 +1,77 @@
 // import "fonts/inter-regular.ttf";
 
+global Assets {
+    out property <image> biblioteca: @image-url("assets/image-d81a3bd1d543f942.png");
+    out property <image> icon: @image-url("assets/image-99c1e7fe16e3ea5d.png");
+}
+
+export component Bibleoteka inherits Rectangle {
+    preferred-width: 31px;
+    preferred-height: 31px;
+    Image {
+        height: 31px;
+        image-fit: fill;
+        image-rendering: pixelated;
+        source: Assets.biblioteca;
+        width: 31px;
+        x: 0px;
+        y: 0px;
+    }
+    Rectangle {
+        height: 17px;
+        width: 20px;
+        x: 5px;
+        y: 7px;
+        Image {
+            height: 18.401px;
+            image-fit: fill;
+            source: Assets.icon;
+            width: 21.648px;
+            x: -0.53px;
+            y: -0.701px;
+        }
+    }
+}
+
 export component Demo inherits Window {
-    width: 1200px;
-    height: 800px;
+    width: 1280px;
+    height: 720px;
     background: transparent;
     Rectangle {
         background: #202020;
         clip: true;
         Rectangle {
-            x: 44px;
-            y: 674px;
+            x: 25px;
+            y: 598px;
             width: 96px;
             height: 96px;
             background: #D9D9D9;
             border-radius: 10px;
         }
         Rectangle {
-            x: 167px;
-            y: 700px;
-            width: 961px;
-            height: 22px;
+            x: 148px;
+            y: 622px;
+            width: 1106px;
+            height: 23px;
             Rectangle {
                 x: 0px;
-                y: 7px;
-                width: 961px;
-                height: 8px;
+                y: 9px;
+                width: 1106px;
+                height: 5px;
                 background: #D9D9D9;
             }
-            Image {
+            Rectangle {
                 x: 3px;
                 y: 0px;
                 width: 23px;
-                height: 22px;
-                source: @image-url("assets/image-1cd20f420cbc147e.png");
-                image-fit: fill;
-                image-rendering: pixelated;
+                height: 23px;
+                background: #D9D9D9;
+                border-radius: 4px;
             }
         }
         Rectangle {
-            x: 167px;
-            y: 722px;
+            x: 148px;
+            y: 646px;
             width: 112px;
             height: 38px;
             Rectangle {
@@ -66,16 +98,16 @@ export component Demo inherits Window {
             }
             Rectangle {
                 x: 3px;
-                y: 8px;
+                y: 7px;
                 width: 23px;
-                height: 22px;
+                height: 23px;
                 background: #D9D9D9;
                 border-radius: 4px;
             }
         }
         Rectangle {
-            x: 44px;
-            y: 624px;
+            x: 25px;
+            y: 548px;
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -126,17 +158,8 @@ export component Demo inherits Window {
             }
         }
         Image {
-            x: 10px;
-            y: 14px;
-            width: 31px;
-            height: 31px;
-            source: @image-url("assets/image-d81a3bd1d543f942.png");
-            image-fit: fill;
-            image-rendering: pixelated;
-        }
-        Image {
-            x: 606px;
-            y: 730px;
+            x: 618px;
+            y: 653px;
             width: 43px;
             height: 41px;
             source: @image-url("assets/image-9e45c6515b00fe78.png");
@@ -144,8 +167,8 @@ export component Demo inherits Window {
             image-rendering: pixelated;
         }
         Image {
-            x: 560px;
-            y: 734px;
+            x: 572px;
+            y: 657px;
             width: 31px;
             height: 31px;
             source: @image-url("assets/image-ad9b5a6d06da7dec.png");
@@ -153,31 +176,17 @@ export component Demo inherits Window {
             image-rendering: pixelated;
         }
         Image {
-            x: 664px;
-            y: 734px;
+            x: 676px;
+            y: 657px;
             width: 31px;
             height: 31px;
             source: @image-url("assets/image-8c4553e8b0d341b7.png");
             image-fit: fill;
             image-rendering: pixelated;
         }
-        Rectangle {
-            x: 15px;
-            y: 21px;
-            width: 20px;
-            height: 17px;
-            Image {
-                x: -0.53px;
-                y: -0.701px;
-                width: 21.648px;
-                height: 18.401px;
-                source: @image-url("assets/image-99c1e7fe16e3ea5d.png");
-                image-fit: fill;
-            }
-        }
         Text {
-            x: 44px;
-            y: 650px;
+            x: 25px;
+            y: 574px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
@@ -189,9 +198,15 @@ export component Demo inherits Window {
             letter-spacing: 0.15px;
             wrap: word-wrap;
         }
+        Bibleoteka {
+            x: 25px;
+            y: 28px;
+            width: 31px;
+            height: 31px;
+        }
         Image {
-            x: 1092px;
-            y: 730px;
+            x: 1216px;
+            y: 658px;
             width: 38px;
             height: 38px;
             source: @image-url("assets/image-cfb10b8456555fd5.png");
