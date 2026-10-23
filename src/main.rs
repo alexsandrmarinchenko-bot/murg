@@ -1,8 +1,11 @@
-mod shader;
 mod player;
 mod ui;
-mod settings;
+
+slint::include_modules!();
 
 fn main() {
-    ui::run();
+    if let Err(error) = ui::run() {
+        eprintln!("Не удалось запустить Murglar Controller: {error}");
+        std::process::exit(1);
+    }
 }
