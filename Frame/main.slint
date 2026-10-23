@@ -2,12 +2,16 @@
 
 global Assets {
 <<<<<<< HEAD
+<<<<<<< HEAD
     out property <image> settings_gear: @image-url("assets/settings-gear.svg");
     out property <image> settings_gear_pressed: @image-url("assets/settings-gear-pressed.svg");
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
     out property <image> unnamed: @image-url("assets/image-49194f4ab8df0950.png");
     out property <image> unnamed-2: @image-url("assets/image-a71d83b2d743a058.png");
 }
 
+<<<<<<< HEAD
 export component Bibleoteka inherits Rectangle {
     callback clicked();
     preferred-width: 36px;
@@ -152,15 +156,22 @@ export component Unnamed inherits Rectangle {
 
 export component Unnamed inherits Rectangle {
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+export component Unnamed inherits Rectangle {
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
     preferred-width: 68px;
     preferred-height: 23px;
     Image {
         height: 5px;
         image-fit: fill;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         image-rendering: pixelated;
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+        image-rendering: pixelated;
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
         source: Assets.unnamed;
         width: 68px;
         x: 0px;
@@ -169,6 +180,7 @@ export component Unnamed inherits Rectangle {
     Image {
         height: 23px;
         image-fit: fill;
+<<<<<<< HEAD
 <<<<<<< HEAD
         source: Assets.unnamed-2;
         width: 23px;
@@ -208,6 +220,8 @@ export component ShkalaVremeni inherits Rectangle {
     callback drag_cancelled();
     callback committed(float);
 =======
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
         image-rendering: pixelated;
         source: Assets.unnamed-2;
         width: 23px;
@@ -217,17 +231,24 @@ export component ShkalaVremeni inherits Rectangle {
 }
 
 export component ShkalaVremeni inherits Rectangle {
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
     preferred-width: 1106px;
     preferred-height: 23px;
     Rectangle {
         background: #D9D9D9;
         height: 5px;
 <<<<<<< HEAD
+<<<<<<< HEAD
         width: parent.width;
 =======
         width: 1106px;
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+        width: 1106px;
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
         x: 0px;
         y: 9px;
     }
@@ -236,6 +257,7 @@ export component ShkalaVremeni inherits Rectangle {
         border-radius: 4px;
         height: 23px;
         width: 23px;
+<<<<<<< HEAD
 <<<<<<< HEAD
         x: 3px + max(0px, root.width - self.width - 3px) *
             min(1.0, max(0.0, root.position_seconds / max(root.duration_seconds, 1.0)));
@@ -300,11 +322,14 @@ export component Demo inherits Window {
         width: parent.width;
         height: parent.height;
 =======
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
         x: 3px;
         y: 0px;
     }
 }
 
+<<<<<<< HEAD
 export enum Unnamed2Property1 { default }
 export component Unnamed2 inherits Rectangle {
     in property <Unnamed2Property1> variant-property-1: Unnamed2Property1.default;
@@ -541,11 +566,14 @@ component Unnamed2Override inherits Rectangle {
     }
 }
 
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
 export component Demo inherits Window {
     width: 1280px;
     height: 720px;
     background: transparent;
     Rectangle {
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
         background: #202020;
         clip: true;
@@ -690,6 +718,11 @@ export component Demo inherits Window {
                         }
                     }
 =======
+=======
+        background: #202020;
+        Rectangle {
+            x: 25px;
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
             y: 598px;
             width: 1229px;
             height: 96px;
@@ -772,23 +805,148 @@ export component Demo inherits Window {
                             image-rendering: pixelated;
                         }
                     }
+<<<<<<< HEAD
                     Unnamed2Override {
+=======
+                    Rectangle {
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
                         x: 1063px;
                         y: 5px;
                         width: 36px;
                         height: 36px;
+<<<<<<< HEAD
                     }
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+                        clip: true;
+                        Rectangle {
+                            background: #898989;
+                            border-radius: 7px;
+                        }
+                        Rectangle {
+                            x: 0px;
+                            y: 0px;
+                            width: 34.875px;
+                            height: 34.875px;
+                            background: #2B2B2B;
+                            border-radius: 5px;
+                        }
+                        Image {
+                            x: 12.375px;
+                            y: 12.375px;
+                            width: 11.25px;
+                            height: 11.25px;
+                            source: @image-url("assets/image-07ea07be91459e52.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Rectangle {
+                            x: 6.75px;
+                            y: 14.625px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            Image {
+                                x: -0.5px;
+                                y: -0.5px;
+                                width: 3.25px;
+                                height: 7.75px;
+                                source: @image-url("assets/image-08dd4f984bc692b6.png");
+                                image-fit: fill;
+                            }
+                        }
+                        Image {
+                            x: 29.25px;
+                            y: 21.375px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: 180deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-15f939aa8226c39b.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 21.375px;
+                            y: 6.75px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: 90deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-56eaf140fb8d44ed.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 14.625px;
+                            y: 29.25px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: -90deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-a8a9c628e627326c.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 12.432px;
+                            y: 7.659px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: 45deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-82aac3d8023dc963.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 23.568px;
+                            y: 28.341px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: -135deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-78bf9932e0d428c6.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 28.341px;
+                            y: 12.432px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: 135deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-7154fe93885b3bdb.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                        Image {
+                            x: 7.659px;
+                            y: 23.568px;
+                            width: 2.25px;
+                            height: 6.75px;
+                            transform-rotation: -45deg;
+                            transform-origin: { x: 0px, y: 0px };
+                            source: @image-url("assets/image-7828a3166dc29fbc.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
+                        }
+                    }
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
                 }
             }
         }
         Rectangle {
             x: 25px;
 <<<<<<< HEAD
+<<<<<<< HEAD
             y: parent.height - 172px;
 =======
             y: 548px;
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+            y: 548px;
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -799,10 +957,14 @@ export component Demo inherits Window {
                 opacity: 0;
                 color: #C3C3C3;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 text: root.track_title;
 =======
                 text: "название трека";
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+                text: "название трека";
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -818,10 +980,14 @@ export component Demo inherits Window {
                 y: (self.preferred-height - self.height) / 2;
                 color: #C3C3C3;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 text: root.track_title;
 =======
                 text: "название трека";
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+                text: "название трека";
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -837,10 +1003,14 @@ export component Demo inherits Window {
                 y: (figma-overflow-1-measure.preferred-height - self.height) / 2;
                 color: #C3C3C3;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 text: root.track_title;
 =======
                 text: "название трека";
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+                text: "название трека";
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -853,18 +1023,24 @@ export component Demo inherits Window {
         Text {
             x: 25px;
 <<<<<<< HEAD
+<<<<<<< HEAD
             y: parent.height - 146px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
             text: root.artist_name;
 =======
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
             y: 574px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
             text: "исполнитель";
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
             font-family: "Inter";
             font-size: 15px;
             font-weight: 400;
@@ -873,14 +1049,19 @@ export component Demo inherits Window {
             wrap: word-wrap;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         Bibleoteka {
 =======
         Rectangle {
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+        Rectangle {
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
             x: 17px;
             y: 12px;
             width: 36px;
             height: 36px;
+<<<<<<< HEAD
 <<<<<<< HEAD
             clicked => { root.library_clicked(); }
         }
@@ -897,6 +1078,8 @@ export component Demo inherits Window {
             overflow: elide;
             max-lines: 1;
 =======
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
             Rectangle {
                 x: 0px;
                 y: 1px;
@@ -934,7 +1117,10 @@ export component Demo inherits Window {
                 height: 3px;
                 background: #D9D9D9;
             }
+<<<<<<< HEAD
 >>>>>>> 770a4d6 (23 окт. 2026 г., 21:13)
+=======
+>>>>>>> 252999d (23 окт. 2026 г., 21:42)
         }
     }
 }
