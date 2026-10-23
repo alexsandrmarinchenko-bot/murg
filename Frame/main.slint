@@ -14,7 +14,6 @@ export component Bibleoteka inherits Rectangle {
     Image {
         height: 31px;
         image-fit: fill;
-        image-rendering: pixelated;
         source: Assets.biblioteca;
         width: 31px;
         x: 0px;
@@ -51,7 +50,6 @@ export component Unnamed inherits Rectangle {
     Image {
         height: 5px;
         image-fit: fill;
-        image-rendering: pixelated;
         source: Assets.unnamed;
         width: 68px;
         x: 0px;
@@ -60,7 +58,6 @@ export component Unnamed inherits Rectangle {
     Image {
         height: 23px;
         image-fit: fill;
-        image-rendering: pixelated;
         source: Assets.unnamed-2;
         width: 23px;
         x: 3px + max(0px, root.width - 26px) * (root.value / 100.0);
@@ -168,22 +165,21 @@ export component Demo inherits Window {
     min-height: 270px;
     title: "Murglar Controller";
     background: #202020;
-    property <float> ui_scale: min(root.width / 1280px, root.height / 720px);
     Rectangle {
-        x: (parent.width - 1280px * root.ui_scale) / 2;
-        y: (parent.height - 720px * root.ui_scale) / 2;
-        width: 1280px;
-        height: 720px;
-        transform-scale: root.ui_scale;
-        transform-origin: { x: 0px, y: 0px };
+        x: 0px;
+        y: 0px;
+        width: parent.width;
+        height: parent.height;
         background: #202020;
         clip: true;
         Rectangle {
             x: 25px;
-            y: 598px;
-            width: 1229px;
+            y: parent.height - 122px;
+            width: parent.width - 51px;
             height: 96px;
             FlexboxLayout {
+                width: parent.width;
+                height: parent.height;
                 flex-wrap: no-wrap;
                 spacing: 27px;
                 alignment: space-between;
@@ -202,9 +198,11 @@ export component Demo inherits Window {
                     }
                 }
                 Rectangle {
-                    width: 1106px;
+                    width: parent.width - 123px;
                     height: 73px;
                     FlexboxLayout {
+                        width: parent.width;
+                        height: parent.height;
                         flex-direction: column;
                         flex-wrap: no-wrap;
                         spacing: 1px;
@@ -223,7 +221,7 @@ export component Demo inherits Window {
                             committed(seconds) => { root.seek_committed(seconds); }
                         }
                         Rectangle {
-                            preferred-width: 1106px;
+                            preferred-width: parent.width;
                             min-width: 0px;
                             cross-axis-self-alignment: stretch;
                             horizontal-stretch: 0;
@@ -250,12 +248,11 @@ export component Demo inherits Window {
                                         height: 38px;
                                         source: @image-url("assets/image-a7524bd04a5d9478.png");
                                         image-fit: fill;
-                                        image-rendering: pixelated;
                                     }
                                 }
                             }
                             Rectangle {
-                                x: 526px;
+                                x: (parent.width - 135px) / 2 + 40.5px;
                                 y: 0px;
                                 width: 135px;
                                 height: 41px;
@@ -266,7 +263,6 @@ export component Demo inherits Window {
                                     height: 31px;
                                     source: @image-url("assets/image-ad9b5a6d06da7dec.png");
                                     image-fit: fill;
-                                    image-rendering: pixelated;
                                 }
                                 Image {
                                     x: 46px;
@@ -275,7 +271,6 @@ export component Demo inherits Window {
                                     height: 41px;
                                     source: @image-url("assets/image-9e45c6515b00fe78.png");
                                     image-fit: fill;
-                                    image-rendering: pixelated;
                                 }
                                 Image {
                                     x: 104px;
@@ -284,7 +279,6 @@ export component Demo inherits Window {
                                     height: 31px;
                                     source: @image-url("assets/image-8c4553e8b0d341b7.png");
                                     image-fit: fill;
-                                    image-rendering: pixelated;
                                 }
                                 TouchArea {
                                     x: 0px;
@@ -309,13 +303,12 @@ export component Demo inherits Window {
                                 }
                             }
                             Image {
-                                x: 1075px;
+                                x: parent.width - 31px;
                                 y: 10px;
                                 width: 31px;
                                 height: 31px;
                                 source: @image-url("assets/image-d81a3bd1d543f942.png");
                                 image-fit: fill;
-                                image-rendering: pixelated;
                             }
                         }
                     }
@@ -324,7 +317,7 @@ export component Demo inherits Window {
         }
         Rectangle {
             x: 25px;
-            y: 548px;
+            y: parent.height - 172px;
             width: 162px;
             height: 23px;
             figma-overflow-1-measure := Text {
@@ -376,7 +369,7 @@ export component Demo inherits Window {
         }
         Text {
             x: 25px;
-            y: 574px;
+            y: parent.height - 146px;
             width: 154px;
             height: 16px;
             color: #FFFFFF;
