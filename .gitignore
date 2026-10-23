@@ -1,4 +1,6 @@
-target/
+/target/
 *.bak
 *.bak.*
-backups/
+/backups/
+/.vscode/
+/.idea/
