@@ -90,102 +90,100 @@ export component Demo inherits Window {
             y: 598px;
             width: 1229px;
             height: 96px;
-            FlexboxLayout {
-                flex-wrap: no-wrap;
-                spacing: 27px;
-                alignment: space-between;
-                cross-axis-alignment: end;
-                Rectangle {
-                    width: 96px;
-                    height: 96px;
-                    background: #D9D9D9;
-                    border-radius: 10px;
-                }
-                Rectangle {
-                    width: 1106px;
-                    height: 72.5px;
-                    FlexboxLayout {
-                        flex-direction: column;
-                        flex-wrap: no-wrap;
-                        spacing: 1px;
-                        cross-axis-alignment: start;
-                        ShkalaVremeni {
-                            preferred-width: 1106px;
-                            min-width: 0px;
-                            cross-axis-self-alignment: stretch;
-                            horizontal-stretch: 0;
-                            height: 23px;
+            Rectangle {
+                x: 0px;
+                y: 0px;
+                width: 96px;
+                height: 96px;
+                background: #D9D9D9;
+                border-radius: 10px;
+            }
+            Rectangle {
+                x: 123px;
+                y: 23.5px;
+                width: 1106px;
+                height: 72.5px;
+                FlexboxLayout {
+                    flex-direction: column;
+                    flex-wrap: no-wrap;
+                    spacing: 1px;
+                    cross-axis-alignment: start;
+                    ShkalaVremeni {
+                        preferred-width: 1106px;
+                        min-width: 0px;
+                        cross-axis-self-alignment: stretch;
+                        horizontal-stretch: 0;
+                        height: 23px;
+                    }
+                    Rectangle {
+                        preferred-width: 1106px;
+                        min-width: 0px;
+                        cross-axis-self-alignment: stretch;
+                        horizontal-stretch: 0;
+                        height: 48.5px;
+                        Rectangle {
+                            x: 0px;
+                            y: 10.5px;
+                            width: 112px;
+                            height: 38px;
+                            FlexboxLayout {
+                                flex-wrap: no-wrap;
+                                spacing: 6px;
+                                cross-axis-alignment: center;
+                                Unnamed {
+                                    width: 68px;
+                                    height: 23px;
+                                }
+                                Image {
+                                    width: 38px;
+                                    height: 38px;
+                                    source: @image-url("assets/image-a7524bd04a5d9478.png");
+                                    image-fit: fill;
+                                    image-rendering: pixelated;
+                                }
+                            }
                         }
                         Rectangle {
-                            preferred-width: 1106px;
-                            min-width: 0px;
-                            cross-axis-self-alignment: stretch;
-                            horizontal-stretch: 0;
-                            height: 48.5px;
-                            Rectangle {
-                                x: 0px;
-                                y: 10.5px;
-                                width: 112px;
-                                height: 38px;
-                                FlexboxLayout {
-                                    flex-wrap: no-wrap;
-                                    spacing: 6px;
-                                    cross-axis-alignment: center;
-                                    Unnamed {
-                                        width: 68px;
-                                        height: 23px;
-                                    }
-                                    Image {
-                                        width: 38px;
-                                        height: 38px;
-                                        source: @image-url("assets/image-a7524bd04a5d9478.png");
-                                        image-fit: fill;
-                                        image-rendering: pixelated;
-                                    }
-                                }
-                            }
-                            Rectangle {
-                                x: 526px;
-                                y: 0px;
-                                width: 135px;
-                                height: 41px;
-                                Image {
-                                    x: 0px;
-                                    y: 5px;
-                                    width: 31px;
-                                    height: 31px;
-                                    source: @image-url("assets/image-ad9b5a6d06da7dec.png");
-                                    image-fit: fill;
-                                    image-rendering: pixelated;
-                                }
-                                Image {
-                                    x: 46px;
-                                    y: 0px;
-                                    width: 43px;
-                                    height: 41px;
-                                    source: @image-url("assets/image-9e45c6515b00fe78.png");
-                                    image-fit: fill;
-                                    image-rendering: pixelated;
-                                }
-                                Image {
-                                    x: 104px;
-                                    y: 5px;
-                                    width: 31px;
-                                    height: 31px;
-                                    source: @image-url("assets/image-8c4553e8b0d341b7.png");
-                                    image-fit: fill;
-                                    image-rendering: pixelated;
-                                }
-                            }
+                            x: 526px;
+                            y: 0px;
+                            width: 135px;
+                            height: 41px;
                             Image {
-                                x: 1075px;
-                                y: 10px;
+                                x: 0px;
+                                y: 5px;
                                 width: 31px;
                                 height: 31px;
-                                source: @image-url("assets/image-d81a3bd1d543f942.png");
+                                source: @image-url("assets/image-ad9b5a6d06da7dec.png");
                                 image-fit: fill;
                                 image-rendering: pixelated;
                             }
+                            Image {
+                                x: 46px;
+                                y: 0px;
+                                width: 43px;
+                                height: 41px;
+                                source: @image-url("assets/image-9e45c6515b00fe78.png");
+                                image-fit: fill;
+                                image-rendering: pixelated;
+                            }
+                            Image {
+                                x: 104px;
+                                y: 5px;
+                                width: 31px;
+                                height: 31px;
+                                source: @image-url("assets/image-8c4553e8b0d341b7.png");
+                                image-fit: fill;
+                                image-rendering: pixelated;
+                            }
+                        }
+                        Image {
+                            x: 1075px;
+                            y: 10px;
+                            width: 31px;
+                            height: 31px;
+                            source: @image-url("assets/image-d81a3bd1d543f942.png");
+                            image-fit: fill;
+                            image-rendering: pixelated;
                         }
                     }
                 }
