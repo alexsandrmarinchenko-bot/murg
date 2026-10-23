@@ -9,31 +9,166 @@ global Assets {
 
 export component Bibleoteka inherits Rectangle {
     callback clicked();
-    preferred-width: 31px;
-    preferred-height: 31px;
-    Image {
-        height: 31px;
-        image-fit: fill;
-        source: Assets.biblioteca;
-        width: 31px;
+    preferred-width: 36px;
+    preferred-height: 36px;
+
+    // Default / Hover / Pressed appearance from the Figma component set.
+    Rectangle {
         x: 0px;
-        y: 0px;
+        y: 1px;
+        width: 36px;
+        height: 35px;
+        background: area.pressed ? #2B2B2B : #898989;
+        border-radius: area.pressed ? 5px : 7px;
+        animate background { duration: 150ms; easing: ease-in-out; }
     }
     Rectangle {
-        height: 17px;
-        width: 20px;
-        x: 5px;
-        y: 7px;
-        Image {
-            height: 18.401px;
-            image-fit: fill;
-            source: Assets.icon;
-            width: 21.648px;
-            x: -0.53px;
-            y: -0.701px;
+        x: 0px;
+        y: 0px;
+        width: 34.875px;
+        height: 34.875px;
+        background: #2B2B2B;
+        border-width: area.has-hover && !area.pressed ? 1px : 0px;
+        border-color: #FFFFFF;
+        border-radius: 5px;
+        animate border-width { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: area.pressed ? 5px : 6px;
+        y: area.pressed ? 7px : 9px;
+        width: area.pressed ? 26px : 25px;
+        height: area.pressed ? 5px : 3px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate x, y, width, height, background {
+            duration: 150ms;
+            easing: ease-in-out;
         }
     }
-    TouchArea {
+    Rectangle {
+        x: area.pressed ? 5px : 6px;
+        y: area.pressed ? 15px : 17px;
+        width: area.pressed ? 26px : 25px;
+        height: area.pressed ? 5px : 3px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate x, y, width, height, background {
+            duration: 150ms;
+            easing: ease-in-out;
+        }
+    }
+    Rectangle {
+        x: area.pressed ? 5px : 6px;
+        y: area.pressed ? 23px : 25px;
+        width: area.pressed ? 26px : 25px;
+        height: area.pressed ? 5px : 3px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate x, y, width, height, background {
+            duration: 150ms;
+            easing: ease-in-out;
+        }
+    }
+    area := TouchArea {
+        width: parent.width;
+        height: parent.height;
+        clicked => { root.clicked(); }
+    }
+}
+
+export component SettingsButton inherits Rectangle {
+    callback clicked();
+    preferred-width: 36px;
+    preferred-height: 36px;
+
+    Rectangle {
+        x: 0px;
+        y: 1px;
+        width: 36px;
+        height: 35px;
+        background: area.pressed ? #2B2B2B : #898989;
+        border-radius: area.pressed ? 5px : 7px;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 0px;
+        y: 0px;
+        width: 34.875px;
+        height: 34.875px;
+        background: #2B2B2B;
+        border-width: area.has-hover && !area.pressed ? 1px : 0px;
+        border-color: #FFFFFF;
+        border-radius: 5px;
+        animate border-width { duration: 150ms; easing: ease-in-out; }
+    }
+
+    // Eight gear teeth follow the geometry of the Figma export.
+    Rectangle {
+        x: 16.5px; y: 5.5px; width: 3px; height: 7px;
+        border-radius: 1px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 16.5px; y: 23.5px; width: 3px; height: 7px;
+        border-radius: 1px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 5.5px; y: 16.5px; width: 7px; height: 3px;
+        border-radius: 1px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 23.5px; y: 16.5px; width: 7px; height: 3px;
+        border-radius: 1px;
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 8.25px; y: 8.25px; width: 3px; height: 7px;
+        border-radius: 1px;
+        transform-rotation: 45deg;
+        transform-origin: { x: 1.5px, y: 3.5px };
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 24.75px; y: 8.25px; width: 3px; height: 7px;
+        border-radius: 1px;
+        transform-rotation: -45deg;
+        transform-origin: { x: 1.5px, y: 3.5px };
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 8.25px; y: 21.75px; width: 3px; height: 7px;
+        border-radius: 1px;
+        transform-rotation: -45deg;
+        transform-origin: { x: 1.5px, y: 3.5px };
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 24.75px; y: 21.75px; width: 3px; height: 7px;
+        border-radius: 1px;
+        transform-rotation: 45deg;
+        transform-origin: { x: 1.5px, y: 3.5px };
+        background: area.pressed ? #FFFFFF : #D9D9D9;
+        animate background { duration: 150ms; easing: ease-in-out; }
+    }
+    Rectangle {
+        x: 12px;
+        y: 12px;
+        width: 12px;
+        height: 12px;
+        border-radius: 6px;
+        background: #2B2B2B;
+        border-width: 2px;
+        border-color: area.pressed ? #FFFFFF : #D9D9D9;
+        animate border-color { duration: 150ms; easing: ease-in-out; }
+    }
+
+    area := TouchArea {
         width: parent.width;
         height: parent.height;
         clicked => { root.clicked(); }
@@ -149,6 +284,7 @@ export component Demo inherits Window {
     in-out property <string> status_message: "";
 
     callback library_clicked();
+    callback settings_clicked();
     callback previous_clicked();
     callback play_clicked();
     callback next_clicked();
@@ -302,13 +438,12 @@ export component Demo inherits Window {
                                     clicked => { root.next_clicked(); }
                                 }
                             }
-                            Image {
-                                x: parent.width - 31px;
-                                y: 10px;
-                                width: 31px;
-                                height: 31px;
-                                source: @image-url("assets/image-d81a3bd1d543f942.png");
-                                image-fit: fill;
+                            SettingsButton {
+                                x: parent.width - 43px;
+                                y: 5px;
+                                width: 36px;
+                                height: 36px;
+                                clicked => { root.settings_clicked(); }
                             }
                         }
                     }
@@ -382,10 +517,10 @@ export component Demo inherits Window {
             wrap: word-wrap;
         }
         Bibleoteka {
-            x: 25px;
-            y: 28px;
-            width: 31px;
-            height: 31px;
+            x: 17px;
+            y: 12px;
+            width: 36px;
+            height: 36px;
             clicked => { root.library_clicked(); }
         }
         Text {
