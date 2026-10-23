@@ -511,15 +511,11 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     seek.add_css_class("figma-seek");
     controls.append(&seek);
 
-    // A 48px action row intentionally allows transport buttons to sit 8px
-    // lower than the volume slider, matching the Figma artwork.
-    let action_row = gtk::Overlay::new();
+    // Adaptive horizontal row: volume, flexible gap, transport,
+    // flexible gap, settings.
+    let action_row = gtk::Box::new(gtk::Orientation::Horizontal, 0);
     action_row.set_hexpand(true);
     action_row.set_size_request(1, 48);
-
-    let action_base = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    action_base.set_hexpand(true);
-    action_base.set_size_request(1, 48);
 
     let volume_group = gtk::Box::new(gtk::Orientation::Horizontal, 6);
     volume_group.set_size_request(112, 38);
@@ -537,18 +533,15 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     volume.add_css_class("figma-volume");
     volume_group.append(&volume);
 
-    let volume_icon = picture_from_project_file(
-        "Frame/assets/image-a7524bd04a5d9478.png",
-        38,
-        38,
-    );
+    let volume_icon = picture_from_project_file("Frame/assets/image-a7524bd04a5d9478.png", 38, 38);
     volume_group.append(&volume_icon);
-    action_base.append(&volume_group);
+    action_row.append(&volume_group);
 
-    let action_spacer = gtk::Box::new(gtk::Orientation::Horizontal, 0);
-    action_spacer.set_hexpand(true);
-    action_base.append(&action_spacer);
+    let action_spacer_left = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+    action_spacer_left.set_hexpand(true);
+    action_row.append(&action_spacer_left);
 
+    // Flexible space is distributed around the transport controls.
     let settings = gtk::Button::new();
     settings.add_css_class("figma-control");
     settings.set_size_request(31, 31);
@@ -561,17 +554,9 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
         31,
         31,
     )));
-    action_base.append(&settings);
-    action_row.set_child(Some(&action_base));
-
-    // Align the controls to the component positions in Frame/main.slint.
     let transport = gtk::Box::new(gtk::Orientation::Horizontal, 15);
     transport.set_halign(gtk::Align::Center);
     transport.set_valign(gtk::Align::Start);
-    transport.set_margin_top(0);
-    // Figma places the 135px transport group at x=526 in a 1106px row.
-    // An 81px start margin shifts a centered group 40.5px to the right.
-    transport.set_margin_start(81);
     transport.add_css_class("figma-transport");
 
     let previous = gtk::Button::new();
@@ -638,7 +623,13 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     )));
     transport.append(&next);
 
-    action_row.add_overlay(&transport);
+    action_row.append(&transport);
+
+    let action_spacer_right = gtk::Box::new(gtk::Orientation::Horizontal, 0);
+    action_spacer_right.set_hexpand(true);
+    action_row.append(&action_spacer_right);
+    action_row.append(&settings);
+
     controls.append(&action_row);
     main_row.append(&controls);
     dock.append(&main_row);
@@ -676,9 +667,8 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
         let model = Rc::clone(&snapshot);
         let ui_for_callback = ui.clone();
         let play_button = ui.play.clone();
-        play_button.connect_clicked(move |_| {
-            run_player_action("PlayPause", &model, &ui_for_callback)
-        });
+        play_button
+            .connect_clicked(move |_| run_player_action("PlayPause", &model, &ui_for_callback));
     }
     {
         let model = Rc::clone(&snapshot);
@@ -766,7 +756,9 @@ fn save_theme(theme: &str) {
         return;
     };
     if let Some(parent) = path.parent() {
-        if let Err(error) = std::fs::create_dir_all(parent).and_then(|_| std::fs::write(&path, theme)) {
+        if let Err(error) =
+            std::fs::create_dir_all(parent).and_then(|_| std::fs::write(&path, theme))
+        {
             eprintln!("Не удалось сохранить тему: {error}");
         }
     }
@@ -794,7 +786,9 @@ pub fn apply_theme(theme: &str) {
         "amber" => "amber.css",
         _ => "dark.css",
     };
-    let path = Path::new(env!("CARGO_MANIFEST_DIR")).join("themes").join(file);
+    let path = Path::new(env!("CARGO_MANIFEST_DIR"))
+        .join("themes")
+        .join(file);
     let provider = gtk::CssProvider::new();
     match std::fs::read_to_string(path) {
         Ok(css) => provider.load_from_data(&css),
