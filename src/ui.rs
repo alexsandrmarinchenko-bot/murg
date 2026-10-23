@@ -10,7 +10,7 @@ use url::Url;
 
 use crate::player;
 
-slint::include_modules!();
+use crate::PlayerWindow;
 
 #[derive(Default)]
 struct PlayerSnapshot {
