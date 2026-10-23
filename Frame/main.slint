@@ -8,6 +8,7 @@ global Assets {
 }
 
 export component Bibleoteka inherits Rectangle {
+    callback clicked();
     preferred-width: 31px;
     preferred-height: 31px;
     Image {
@@ -33,9 +34,18 @@ export component Bibleoteka inherits Rectangle {
             y: -0.701px;
         }
     }
+    TouchArea {
+        width: parent.width;
+        height: parent.height;
+        clicked => { root.clicked(); }
+    }
 }
 
 export component Unnamed inherits Rectangle {
+    in-out property <float> value: 8;
+    callback drag_started();
+    callback drag_finished();
+    callback changed(float);
     preferred-width: 68px;
     preferred-height: 23px;
     Image {
@@ -53,18 +63,47 @@ export component Unnamed inherits Rectangle {
         image-rendering: pixelated;
         source: Assets.unnamed-2;
         width: 23px;
-        x: 3px;
+        x: 3px + max(0px, root.width - 26px) * (root.value / 100.0);
         y: 0px;
+    }
+    area := TouchArea {
+        width: parent.width;
+        height: parent.height;
+        moved => {
+            if (self.pressed) {
+                root.value = max(0.0, min(100.0,
+                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * 100.0));
+            }
+        }
+        pointer-event(event) => {
+            if (event.kind == PointerEventKind.down) {
+                root.drag_started();
+            }
+            if (event.kind == PointerEventKind.up) {
+                root.value = max(0.0, min(100.0,
+                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * 100.0));
+                root.changed(root.value);
+                root.drag_finished();
+            }
+            if (event.kind == PointerEventKind.cancel) {
+                root.drag_finished();
+            }
+        }
     }
 }
 
 export component ShkalaVremeni inherits Rectangle {
+    in-out property <float> position_seconds: 0;
+    in property <float> duration_seconds: 1;
+    callback drag_started();
+    callback drag_cancelled();
+    callback committed(float);
     preferred-width: 1106px;
     preferred-height: 23px;
     Rectangle {
         background: #D9D9D9;
         height: 5px;
-        width: 1106px;
+        width: parent.width;
         x: 0px;
         y: 9px;
     }
@@ -73,16 +112,70 @@ export component ShkalaVremeni inherits Rectangle {
         border-radius: 4px;
         height: 23px;
         width: 23px;
-        x: 3px;
+        x: 3px + max(0px, root.width - self.width - 3px) *
+            min(1.0, max(0.0, root.position_seconds / max(root.duration_seconds, 1.0)));
         y: 0px;
+    }
+    area := TouchArea {
+        width: parent.width;
+        height: parent.height;
+        moved => {
+            if (self.pressed) {
+                root.position_seconds = max(0.0, min(root.duration_seconds,
+                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * root.duration_seconds));
+            }
+        }
+        pointer-event(event) => {
+            if (event.kind == PointerEventKind.down) {
+                root.drag_started();
+            }
+            if (event.kind == PointerEventKind.up) {
+                root.position_seconds = max(0.0, min(root.duration_seconds,
+                    ((self.mouse-x - 11.5px) / max(root.width - 23px, 1px)) * root.duration_seconds));
+                root.committed(root.position_seconds);
+            }
+            if (event.kind == PointerEventKind.cancel) {
+                root.drag_cancelled();
+            }
+        }
     }
 }
 
 export component Demo inherits Window {
-    width: 1280px;
-    height: 720px;
-    background: transparent;
+    in-out property <string> track_title: "название трека";
+    in-out property <string> artist_name: "исполнитель";
+    in-out property <float> position_seconds: 0;
+    in-out property <float> duration_seconds: 1;
+    in-out property <float> volume_percent: 8;
+    in-out property <bool> is_playing: false;
+    in-out property <image> cover_art;
+    in-out property <string> status_message: "";
+
+    callback library_clicked();
+    callback previous_clicked();
+    callback play_clicked();
+    callback next_clicked();
+    callback seek_drag_started();
+    callback seek_drag_cancelled();
+    callback seek_committed(float);
+    callback volume_drag_started();
+    callback volume_drag_finished();
+    callback volume_changed(float);
+
+    preferred-width: 1280px;
+    preferred-height: 720px;
+    min-width: 480px;
+    min-height: 270px;
+    title: "Murglar Controller";
+    background: #202020;
+    property <float> ui_scale: min(root.width / 1280px, root.height / 720px);
     Rectangle {
+        x: (parent.width - 1280px * root.ui_scale) / 2;
+        y: (parent.height - 720px * root.ui_scale) / 2;
+        width: 1280px;
+        height: 720px;
+        transform-scale: root.ui_scale;
+        transform-origin: { x: 0px, y: 0px };
         background: #202020;
         clip: true;
         Rectangle {
@@ -100,6 +193,13 @@ export component Demo inherits Window {
                     height: 96px;
                     background: #D9D9D9;
                     border-radius: 10px;
+                    clip: true;
+                    Image {
+                        width: parent.width;
+                        height: parent.height;
+                        source: root.cover_art;
+                        image-fit: cover;
+                    }
                 }
                 Rectangle {
                     width: 1106px;
@@ -116,6 +216,11 @@ export component Demo inherits Window {
                             cross-axis-self-alignment: stretch;
                             horizontal-stretch: 0;
                             height: 23px;
+                            position_seconds <=> root.position_seconds;
+                            duration_seconds: root.duration_seconds;
+                            drag_started => { root.seek_drag_started(); }
+                            drag_cancelled => { root.seek_drag_cancelled(); }
+                            committed(seconds) => { root.seek_committed(seconds); }
                         }
                         Rectangle {
                             preferred-width: 1106px;
@@ -135,6 +240,10 @@ export component Demo inherits Window {
                                     Unnamed {
                                         width: 68px;
                                         height: 23px;
+                                        value <=> root.volume_percent;
+                                        drag_started => { root.volume_drag_started(); }
+                                        drag_finished => { root.volume_drag_finished(); }
+                                        changed(value) => { root.volume_changed(value); }
                                     }
                                     Image {
                                         width: 38px;
@@ -177,6 +286,27 @@ export component Demo inherits Window {
                                     image-fit: fill;
                                     image-rendering: pixelated;
                                 }
+                                TouchArea {
+                                    x: 0px;
+                                    y: 0px;
+                                    width: 31px;
+                                    height: 41px;
+                                    clicked => { root.previous_clicked(); }
+                                }
+                                TouchArea {
+                                    x: 46px;
+                                    y: 0px;
+                                    width: 43px;
+                                    height: 41px;
+                                    clicked => { root.play_clicked(); }
+                                }
+                                TouchArea {
+                                    x: 104px;
+                                    y: 0px;
+                                    width: 31px;
+                                    height: 41px;
+                                    clicked => { root.next_clicked(); }
+                                }
                             }
                             Image {
                                 x: 1075px;
@@ -204,7 +334,7 @@ export component Demo inherits Window {
                 height: parent.height;
                 opacity: 0;
                 color: #C3C3C3;
-                text: "название трека";
+                text: root.track_title;
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -219,7 +349,7 @@ export component Demo inherits Window {
                 x: (self.preferred-width - self.width) / 2;
                 y: (self.preferred-height - self.height) / 2;
                 color: #C3C3C3;
-                text: "название трека";
+                text: root.track_title;
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -234,7 +364,7 @@ export component Demo inherits Window {
                 height: parent.height + 2px * ceil(max(0px, figma-overflow-1-measure.preferred-height - parent.height) / 2px + 0.091);
                 y: (figma-overflow-1-measure.preferred-height - self.height) / 2;
                 color: #C3C3C3;
-                text: "название трека";
+                text: root.track_title;
                 font-family: "Inter";
                 font-size: 20px;
                 font-weight: 400;
@@ -250,7 +380,7 @@ export component Demo inherits Window {
             width: 154px;
             height: 16px;
             color: #FFFFFF;
-            text: "исполнитель";
+            text: root.artist_name;
             font-family: "Inter";
             font-size: 15px;
             font-weight: 400;
@@ -263,6 +393,20 @@ export component Demo inherits Window {
             y: 28px;
             width: 31px;
             height: 31px;
+            clicked => { root.library_clicked(); }
+        }
+        Text {
+            x: 25px;
+            y: 64px;
+            width: min(parent.width - 50px, 900px);
+            height: 20px;
+            visible: root.status_message != "";
+            text: root.status_message;
+            color: #C3C3C3;
+            font-family: "Inter";
+            font-size: 11px;
+            overflow: elide;
+            max-lines: 1;
         }
     }
 }
