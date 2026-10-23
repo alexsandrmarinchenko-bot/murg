@@ -506,7 +506,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     seek.set_draw_value(false);
     seek.set_digits(0);
     seek.set_hexpand(true);
-    seek.set_size_request(1, 24);
+    seek.set_size_request(1, 23);
     seek.set_tooltip_text(Some("Перемотка"));
     seek.add_css_class("figma-seek");
     controls.append(&seek);
@@ -525,6 +525,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     volume_group.set_size_request(112, 38);
     volume_group.set_halign(gtk::Align::Start);
     volume_group.set_valign(gtk::Align::Start);
+    volume_group.set_margin_top(10);
     volume_group.add_css_class("figma-volume-group");
 
     let volume = gtk::Scale::with_range(gtk::Orientation::Horizontal, 0.0, 100.0, 1.0);
@@ -553,7 +554,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     settings.set_size_request(31, 31);
     settings.set_tooltip_text(Some("Настройки"));
     settings.set_focusable(false);
-    settings.set_margin_top(17);
+    settings.set_margin_top(10);
     settings.set_valign(gtk::Align::Start);
     settings.set_child(Some(&picture_from_project_file(
         "Frame/assets/image-d81a3bd1d543f942.png",
@@ -563,14 +564,14 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     action_base.append(&settings);
     action_row.set_child(Some(&action_base));
 
-    // Center the transport group on the window's visual center. Since the seek
-    // area begins at x=167, a 40px end margin shifts the group's center 20px left
-    // from the seek area's center, matching the exported 1200px composition.
+    // Align the controls to the component positions in Frame/main.slint.
     let transport = gtk::Box::new(gtk::Orientation::Horizontal, 15);
     transport.set_halign(gtk::Align::Center);
     transport.set_valign(gtk::Align::Start);
-    transport.set_margin_top(7);
-    transport.set_margin_end(122);
+    transport.set_margin_top(0);
+    // Figma places the 135px transport group at x=526 in a 1106px row.
+    // An 81px start margin shifts a centered group 40.5px to the right.
+    transport.set_margin_start(81);
     transport.add_css_class("figma-transport");
 
     let previous = gtk::Button::new();
@@ -578,7 +579,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     previous.set_size_request(31, 31);
     previous.set_tooltip_text(Some("Предыдущий трек"));
     previous.set_focusable(false);
-    previous.set_margin_top(4);
+    previous.set_margin_top(5);
     previous.set_child(Some(&picture_from_project_file(
         "Frame/assets/image-ad9b5a6d06da7dec.png",
         31,
@@ -629,7 +630,7 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
     next.set_size_request(31, 31);
     next.set_tooltip_text(Some("Следующий трек"));
     next.set_focusable(false);
-    next.set_margin_top(4);
+    next.set_margin_top(5);
     next.set_child(Some(&picture_from_project_file(
         "Frame/assets/image-8c4553e8b0d341b7.png",
         31,
