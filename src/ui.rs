@@ -169,8 +169,10 @@ scale.figma-volume {
 
 scale.figma-volume trough {
     min-height: 5px;
-    background-color: #646464;
-    background-image: none;
+    background-color: transparent;
+    background-image: @VOLUME_TRACK_URL@;
+    background-repeat: no-repeat;
+    background-position: center;
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -186,17 +188,15 @@ scale.figma-volume highlight {
 }
 
 scale.figma-volume slider {
-    min-width: 13px;
-    min-height: 13px;
-    background-color: #f5f5f5;
-    background-image: none;
-    border: 1px solid #646464;
-    border-radius: 3px;
+    min-width: 23px;
+    min-height: 23px;
+    background-color: transparent;
+    background-image: @VOLUME_THUMB_URL@;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 0;
     box-shadow: none;
-}
-
-scale.figma-volume slider:hover {
-    background-color: #ffffff;
 }
 
 label.figma-status {
@@ -251,15 +251,10 @@ struct UiWidgets {
 
 fn project_path(relative: &str) -> PathBuf {
     let root = Path::new(env!("CARGO_MANIFEST_DIR"));
-    let requested = root.join(relative);
-    if requested.is_file() {
-        return requested;
-    }
 
-    // The exported Figma folder was renamed from Frame-1 to Frame.
-    // Accept either name so the UI still finds its button images in older
-    // local checkouts and does not silently render empty buttons.
-    let alternate = if let Some(rest) = relative.strip_prefix("Frame/") {
+    // Prefer the newest Figma export in Frame-1 when both exports are present.
+    // Fall back to Frame for older local checkouts.
+    let preferred = if let Some(rest) = relative.strip_prefix("Frame/") {
         Some(root.join("Frame-1").join(rest))
     } else if let Some(rest) = relative.strip_prefix("Frame-1/") {
         Some(root.join("Frame").join(rest))
@@ -267,9 +262,16 @@ fn project_path(relative: &str) -> PathBuf {
         None
     };
 
-    alternate
-        .filter(|path| path.is_file())
-        .unwrap_or(requested)
+    if let Some(path) = preferred.filter(|path| path.is_file()) {
+        return path;
+    }
+
+    let requested = root.join(relative);
+    if requested.is_file() {
+        return requested;
+    }
+
+    requested
 }
 
 fn picture_from_project_file(relative: &str, width: i32, height: i32) -> gtk::Picture {
@@ -285,7 +287,14 @@ fn picture_from_project_file(relative: &str, width: i32, height: i32) -> gtk::Pi
 
 fn install_design_css() {
     let provider = gtk::CssProvider::new();
-    provider.load_from_data(DESIGN_CSS);
+    let volume_track = project_path("Frame/assets/image-49194f4ab8df0950.png");
+    let volume_thumb = project_path("Frame/assets/image-a71d83b2d743a058.png");
+    let volume_track_url = format!("url(\"file://{}\")", volume_track.display());
+    let volume_thumb_url = format!("url(\"file://{}\")", volume_thumb.display());
+    let css = DESIGN_CSS
+        .replace("@VOLUME_TRACK_URL@", &volume_track_url)
+        .replace("@VOLUME_THUMB_URL@", &volume_thumb_url);
+    provider.load_from_data(&css);
 
     if let Some(display) = gtk::gdk::Display::default() {
         // Slightly above APPLICATION priority so the exported Figma layout remains
@@ -541,15 +550,15 @@ fn build_main_window(application: &gtk::Application) -> gtk::ApplicationWindow {
 
     let settings = gtk::Button::new();
     settings.add_css_class("figma-control");
-    settings.set_size_request(38, 38);
+    settings.set_size_request(31, 31);
     settings.set_tooltip_text(Some("Настройки"));
     settings.set_focusable(false);
-    settings.set_margin_top(12);
+    settings.set_margin_top(17);
     settings.set_valign(gtk::Align::Start);
     settings.set_child(Some(&picture_from_project_file(
-        "Frame/assets/image-cfb10b8456555fd5.png",
-        38,
-        38,
+        "Frame/assets/image-d81a3bd1d543f942.png",
+        31,
+        31,
     )));
     action_base.append(&settings);
     action_row.set_child(Some(&action_base));
