@@ -2667,7 +2667,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "murglar-controller"
+name = "playerdock"
 version = "0.1.0"
 dependencies = [
  "slint",

@@ -25,8 +25,8 @@ fn set_status(window: &slint::Weak<Demo>, message: impl Into<SharedString>) {
 }
 
 fn art_image_from_url(value: &str) -> Option<Image> {
-    // Murglar normally publishes a local file:// art URL through MPRIS.
-    // Remote URLs are deliberately not fetched implicitly.
+    // MPRIS may publish local or remote artwork URLs. The current implementation
+    // intentionally loads local file:// URLs only; remote artwork is a roadmap item.
     let parsed = Url::parse(value).ok()?;
     if parsed.scheme() != "file" {
         return None;
@@ -48,7 +48,7 @@ fn refresh_player(
     let info = match player::read_status() {
         Ok(info) => info,
         Err(error) => {
-            window.set_status_message(format!("Нет связи с Murglar через MPRIS: {error}").into());
+            window.set_status_message(format!("Нет связи с выбранным плеером через MPRIS: {error}").into());
             return;
         }
     };
@@ -131,7 +131,7 @@ pub fn run() -> Result<(), slint::PlatformError> {
         window.on_library_clicked(move || {
             set_status(
                 &weak,
-                "Библиотека пока не подключена к источнику данных Murglar.",
+                "Библиотека пока не подключена.",
             );
         });
     }
@@ -203,7 +203,7 @@ pub fn run() -> Result<(), slint::PlatformError> {
                 let target = (seconds as f64).clamp(0.0, duration.max(0.0));
                 player::set_position(&track_id, target)
             } else {
-                Err("Murglar не сообщил идентификатор текущего трека".to_owned())
+                Err("Плеер не сообщил идентификатор текущего трека".to_owned())
             };
             match result {
                 Ok(()) => {
