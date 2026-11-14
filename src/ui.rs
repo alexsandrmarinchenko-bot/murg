@@ -60,14 +60,14 @@ fn refresh_player(
     };
 
     let Some(service_name) = selected_service(selection) else {
-        window.set_track_title("Запусти медиаплеер");
-        window.set_artist_name("Ожидание MPRIS-плееров");
+        window.set_track_title("Запусти медиаплеер".into());
+        window.set_artist_name("Ожидание MPRIS-плееров".into());
         window.set_is_playing(false);
         window.set_position_seconds(0.0);
         window.set_duration_seconds(1.0);
         window.set_volume_percent(0.0);
         window.set_cover_art(Image::default());
-        window.set_status_message("Не найдено активных MPRIS-плееров.");
+        window.set_status_message("Не найдено активных MPRIS-плееров.".into());
         let mut current = snapshot.borrow_mut();
         current.track_id = None;
         current.duration = 1.0;
@@ -457,7 +457,7 @@ pub fn run() -> Result<(), slint::PlatformError> {
             }
 
             window.set_update_busy(true);
-            window.set_update_message("Скачивание и проверка обновления...");
+            window.set_update_message("Скачивание и проверка обновления...".into());
 
             let weak = weak.clone();
             thread::spawn(move || match updater::download_and_launch_update() {
