@@ -235,9 +235,17 @@ export component Demo inherits Window {
     in-out property <bool> is_playing: false;
     in-out property <image> cover_art;
     in-out property <string> status_message: "";
+    in-out property <string> player_name: "Нет активного плеера";
+    in-out property <int> player_count: 0;
+    in-out property <bool> update_available: false;
+    in-out property <string> update_version: "";
+    in-out property <bool> update_busy: false;
+    in-out property <string> update_message: "";
 
     callback library_clicked();
     callback settings_clicked();
+    callback player_switch_clicked();
+    callback update_clicked();
     callback previous_clicked();
     callback play_clicked();
     callback next_clicked();
@@ -612,6 +620,82 @@ export component Demo inherits Window {
             color: #C3C3C3;
             font-family: "Inter";
             font-size: 11px;
+            overflow: elide;
+            max-lines: 1;
+        }
+        Rectangle {
+            x: 64px;
+            y: 12px;
+            width: 220px;
+            height: 36px;
+            visible: root.player_count > 0;
+            background: #2B2B2B;
+            border-radius: 7px;
+            Text {
+                x: 10px;
+                y: 0px;
+                width: parent.width - 20px;
+                height: parent.height;
+                color: #E7E7E7;
+                text: root.player_name + (root.player_count > 1 ? "  ▾" : "");
+                font-family: "Inter";
+                font-size: 12px;
+                vertical-alignment: center;
+                overflow: elide;
+                max-lines: 1;
+            }
+            player_switch_area := TouchArea {
+                width: parent.width;
+                height: parent.height;
+                visible: root.player_count > 1;
+                clicked => { root.player_switch_clicked(); }
+            }
+        }
+        Rectangle {
+            x: parent.width - self.width - 20px;
+            y: 12px;
+            width: 190px;
+            height: 36px;
+            visible: root.update_available;
+            background: update_area.pressed ? #6735B7 : #8A38F5;
+            border-radius: 8px;
+            Text {
+                x: 8px;
+                y: 0px;
+                width: parent.width - 16px;
+                height: parent.height;
+                color: #FFFFFF;
+                text: root.update_busy ? "Установка..." : "Обновить · " + root.update_version;
+                font-family: "Inter";
+                font-size: 12px;
+                font-weight: 600;
+                horizontal-alignment: center;
+                vertical-alignment: center;
+                overflow: elide;
+                max-lines: 1;
+            }
+            update_area := TouchArea {
+                width: parent.width;
+                height: parent.height;
+                clicked => {
+                    if (!root.update_busy) {
+                        root.update_clicked();
+                    }
+                }
+            }
+        }
+        Text {
+            x: parent.width - 220px;
+            y: 52px;
+            width: 200px;
+            height: 18px;
+            visible: root.update_message != "";
+            text: root.update_message;
+            color: #C3C3C3;
+            font-family: "Inter";
+            font-size: 10px;
+            horizontal-alignment: right;
+            vertical-alignment: center;
             overflow: elide;
             max-lines: 1;
         }

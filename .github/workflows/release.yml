@@ -1,0 +1,57 @@
+name: PlayerDock release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+jobs:
+  linux-x86_64:
+    name: Build Linux x86_64 release
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Slint build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pkg-config libx11-dev libx11-xcb-dev libxkbcommon-dev libxkbcommon-x11-dev libwayland-dev libegl1-mesa-dev libfontconfig1-dev libfreetype6-dev
+
+      - name: Verify tag matches Cargo version
+        shell: bash
+        run: |
+          tag_version="\${GITHUB_REF_NAME#v}"
+          package_version="$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | select(.name == "playerdock") | .version')"
+          test "$tag_version" = "$package_version" || {
+            echo "Tag $tag_version does not match Cargo.toml version $package_version"
+            exit 1
+          }
+
+      - name: Build release binary
+        run: cargo build --locked --release
+
+      - name: Prepare release assets
+        run: |
+          mkdir -p dist
+          cp target/release/playerdock dist/playerdock-linux-x86_64
+          chmod 755 dist/playerdock-linux-x86_64
+          cd dist
+          sha256sum playerdock-linux-x86_64 > playerdock-linux-x86_64.sha256
+
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" \
+            dist/playerdock-linux-x86_64 \
+            dist/playerdock-linux-x86_64.sha256 \
+            --title "PlayerDock $GITHUB_REF_NAME" \
+            --generate-notes \
+            --verify-tag
